@@ -9,8 +9,8 @@ export default class Login extends React.Component {
             <div>
                 <h2>Login</h2>
                 <div onClick={()=>hashHistory.goBack()}>Go BACK</div>
-            });
             </div>
         )
+
     }
 }

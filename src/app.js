@@ -8,9 +8,10 @@ import { Router, Route, hashHistory, Link } from "react-router";
 
 import { addList } from './action.js';
 import configureStore from './configureStore.js'
-import Page from './components/Page.jsx';
-import PageId from './components/PageId.jsx';
-import Login from './Login.jsx';
+import Pick from './components/Pick.js';
+// import Page from './components/Page.jsx';
+// import PageId from './components/PageId.jsx';
+import Login from './Login.js';
 
 const store = configureStore();
 
@@ -18,14 +19,15 @@ const store = configureStore();
 const appRouting = (
     <Router history={hashHistory}>
         <Route path="/">
-            <Route path="login" component={Login} />
+          <Route path="login" component={Login} />
+          <Route path="pick" component={Pick} />
         </Route>
     </Router>
 );
 
 //Routingの初期化
 if (!location.hash.length) {
-    location.hash = "#/pages";
+    location.hash = "#/login";
 }
 
 ReactDom.render((
