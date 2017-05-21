@@ -1,11 +1,9 @@
-var path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
   entry: './src/app.js',
   output: {
     filename: './dist/bundle.js'
-    // path: path.resolve(__dirname, 'dist')
   },
   module: {
     //     rules: [{
@@ -16,7 +14,7 @@ module.exports = {
 		// 	use: 'css-loader'
 	  //           })
     //     }],
-      loaders: [
+      rules: [
         {
           test: /.jsx?$/,
           loader: 'babel-loader',

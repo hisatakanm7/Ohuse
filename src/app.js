@@ -21,16 +21,17 @@ const store = configureStore();
 //Routingの定義
 const appRouting = (
   <Router>
-    <Switch>
+    <div>
+      <Link to="/pick">Pick</Link>
       <Route exact path="/" component={Login}/>
-      <Route path="pick" component={Pick} />
-    </Switch>
+      <Route path="/pick" component={Pick} />
+    </div>
   </Router>
 );
 
 
 if (!location.hash.length) {
-    location.hash = "#/login";
+    location.hash = "/pick";
 }
 
 ReactDom.render((
