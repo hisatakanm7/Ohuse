@@ -23,8 +23,10 @@
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^15.0.1",
     "extract-text-webpack-plugin": "^2.1.0",
+    "file-loader": "^0.11.1",
     "immutable": "^3.8.1",
     "isomorphic-fetch": "^2.2.1",
+    "moment": "^2.18.1",
     "prop-types": "^15.5.10",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
@@ -34,6 +36,7 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
     "style-loader": "^0.17.0",
+    "url-loader": "^0.5.8",
     "webpack-dev-server": "^2.4.5"
   }
 }

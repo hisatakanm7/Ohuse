@@ -18,6 +18,7 @@ import Login from './Login.js';
 
 const store = configureStore();
 
+
 //Routingの定義
 const appRouting = (
   <Router>

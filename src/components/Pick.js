@@ -1,6 +1,11 @@
 import React from 'react';
 import { Calendar } from 'antd';
 import styles from '../calender.css'
+import moment from 'moment';
+
+// It's recommended to set locale in entry file globaly.
+import '../../node_modules/moment/locale/ja';
+moment.locale('ja');
 
 export default class Pick extends React.Component {
 
@@ -63,7 +68,10 @@ function monthCellRender(value) {
   </div> : null;
 }
         return (
-          <Calendar dateCellRender={dateCellRender} monthCellRender={monthCellRender} />
+          <Calendar
+          dateCellRender={dateCellRender}
+          monthCellRender={monthCellRender}
+          />
         )
     }
 }
