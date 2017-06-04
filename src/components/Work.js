@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, Button, Icon } from 'antd';
+import { Modal, Button, Icon, DatePicker } from 'antd';
 import { connect } from 'react-redux';
 const ButtonGroup = Button.Group;
 // import { bindActionCreators } from 'redux';
@@ -8,6 +8,9 @@ import { modalToggleChange } from '../action.js';
 
 export class Work extends React.Component {
     render() {
+      function onChange(date, dateString) {
+        console.log(date, dateString);
+      }
       const { work, num, modalToggleChange } = this.props;
         return (
           <ButtonGroup>
@@ -20,6 +23,7 @@ export class Work extends React.Component {
               onOk={() => modalToggleChange(work.id)}
               onCancel={() => modalToggleChange(work.id)}
             >
+              <DatePicker onChange={onChange} />
               <p>some contents...</p>
               <p>some contents...</p>
               <p>some contents...</p>
