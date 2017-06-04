@@ -52,16 +52,18 @@ const user_data = {
 }
 
 //Works
-const works_data = {
-  id: '',
-  title: '',
-  date: '',
-  description: '',
-  eventName: '',
-  image: '',
-  released: '',
-  creator: '',
-}
+const works_data = [{
+    id: 1,
+    title: '自伝',
+    date: '2017-5-22',
+    description: '私の最初の作品です',
+    eventName: 'my Event',
+    image: '',
+    released: true,
+    creator: 'other',
+    creatorId: 1,
+  }];
+
 
 
 
@@ -132,7 +134,9 @@ const works = (state = I.fromJS(works_data), action) => {
 
 
 const reducer = combineReducers({
-    page //1つ1つのreducerを書く。増えたらここに追加する。
+    page,
+    user,
+    works, //1つ1つのreducerを書く。増えたらここに追加する。
 });
 
 export default reducer

@@ -1,24 +1,23 @@
 import React from "react";
 import { connect } from 'react-redux';
-
+import { bindActionCreators } from 'redux';
+import { Provider } from 'react-redux';
 import { Link, hashHistory } from "react-router";
 import axios from "axios";
+import Work from './Work.js';
 
-export class Login extends React.Component {
-  componentWillMount() {
-    axios.get('http://localhost/count')
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
+export class Works extends React.Component {
     render() {
-      const { page } = this.props;
+      const { works } = this.props;
+      const myWorks = works.toJSON().map((work, key) => {
+            return (
+                <Work work={work} num={key} key={key} />
+            )
+        });
         return (
             <div>
-                <h2>{page.toJSON().datas[0].name}</h2>
+                <h2>{works.toJSON()[0].title}</h2>
+                {myWorks}
                 <div onClick={()=>hashHistory.goBack()}>Go BACK</div>
             </div>
         )
@@ -27,9 +26,9 @@ export class Login extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    const { page } = state;
+    const { works } = state;
     return {
-        page: page
+        works: works
     };
 };
 
@@ -39,9 +38,9 @@ const mapStateToProps = (state) => {
 //     };
 // };
 
-const ContainerAppli = connect(
+const ContainerWorks = connect(
     mapStateToProps,
     // mapDispatchToProps
-)(Login);
+)(Works);
 
-export default ContainerAppli;
+export default ContainerWorks;

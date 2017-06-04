@@ -14,7 +14,9 @@ import {
 import { addList } from './action.js';
 import configureStore from './configureStore.js'
 import Pick from './components/Pick.js';
+import ContainerWorks from './components/Works.js';
 import ContainerAppli from './Login.js';
+import ContainerMyPage from './components/MyPage.js';
 
 const store = configureStore();
 
@@ -23,9 +25,12 @@ const store = configureStore();
 const appRouting = (
   <Router>
     <div>
-      <Link to="/pick">Pick</Link>
+      <Link to="/work">Work</Link>
+      <Link to="/my_page">my page</Link>
       <Route exact path="/" component={ContainerAppli}/>
       <Route path="/pick" component={Pick} />
+      <Route path="/work" component={ContainerWorks} />
+      <Route path="/my_page" component={ContainerMyPage} />
     </div>
   </Router>
 );
