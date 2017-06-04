@@ -1,0 +1,24 @@
+div div.ant-btn-group {
+  display: block;
+  button.btn-date {
+    padding: 0;
+    background-color: #ffce6c;
+    pointer-events: none;
+    span {
+      color: #fff;
+      margin: auto;
+    }
+  }
+  button.btn-title {
+    padding: 0;
+    border-color: #ffce6c;
+  }
+  button.btn-title:hover {
+    background-color: #ffce6c;
+  }
+}
+
+div div.mypage-follows {
+  border-bottom: 3px;
+  border-color: #ffce6c;
+}

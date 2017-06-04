@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+// const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: './src/app.js',
@@ -15,6 +16,10 @@ module.exports = {
         {
           test: /\.css$/,
           loader: 'style-loader!css-loader'
+        },
+        {
+          test: /\.scss$/,
+          loaders: ['style-loader', 'css-loader', 'sass-loader']
         },
         {
           test: /\.(png|jpg)$/,

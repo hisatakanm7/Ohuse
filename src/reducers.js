@@ -74,7 +74,7 @@ const user_data = {
 const works_data = [{
     id: 0,
     title: '自伝',
-    date: '2017-5-22',
+    date: '22',
     description: '私の最初の作品です',
     eventName: 'my Event',
     image: '',
@@ -85,7 +85,7 @@ const works_data = [{
   },{
       id: 1,
       title: '第二作',
-      date: '2017-5-22',
+      date: '22',
       description: '私の２番目の作品です',
       eventName: 'my Event',
       image: '',

@@ -14,8 +14,8 @@ export class Work extends React.Component {
       const { work, num, modalToggleChange } = this.props;
         return (
           <ButtonGroup>
-            <Button>{ work.date }</Button>
-            <Button type="primary" onClick={() => modalToggleChange(work.id)}>{ work.title }</Button>
+            <Button className="btn-date">{ work.date }</Button>
+            <Button className="btn-title" onClick={() => modalToggleChange(work.id)}>{ work.title }</Button>
             <Modal
               title="20px to Top"
               style={{ top: 20 }}
