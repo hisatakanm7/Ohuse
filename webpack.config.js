@@ -6,14 +6,6 @@ module.exports = {
     filename: './dist/bundle.js'
   },
   module: {
-    //     rules: [{
-    //   		test: /\.css$/,
-    //       exclude: /node_modules/,
-    //       loader: "babel-loader",
-		// use: ExtractTextPlugin.extract({
-		// 	use: 'css-loader'
-	  //           })
-    //     }],
       rules: [
         {
           test: /.jsx?$/,
