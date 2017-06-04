@@ -37,7 +37,7 @@ const appRouting = (
 
 
 if (!location.hash.length) {
-    location.hash = "/pick";
+    location.hash = "/work";
 }
 
 ReactDom.render((

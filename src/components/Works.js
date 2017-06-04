@@ -4,21 +4,19 @@ import { bindActionCreators } from 'redux';
 import { Provider } from 'react-redux';
 import { Link, hashHistory } from "react-router";
 import axios from "axios";
-import Work from './Work.js';
+import ContainerWork from './Work.js';
 
 export class Works extends React.Component {
     render() {
       const { works } = this.props;
       const myWorks = works.toJSON().map((work, key) => {
             return (
-                <Work work={work} num={key} key={key} />
+                <ContainerWork work={work} num={key} key={key} />
             )
         });
         return (
             <div>
-                <h2>{works.toJSON()[0].title}</h2>
                 {myWorks}
-                <div onClick={()=>hashHistory.goBack()}>Go BACK</div>
             </div>
         )
 

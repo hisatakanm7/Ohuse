@@ -2,6 +2,25 @@ import { combineReducers } from 'redux';
 const I = require('immutable');
 
 import { ADD_LIST } from './action';
+import { MODAL_TOGGLE_CHANGE } from './action';
+
+const work_object = {
+  id: 0,
+  title: '自伝',
+  date: '2017-5-22',
+  description: '私の最初の作品です',
+  eventName: 'my Event',
+  image: '',
+  released: true,
+  creator: 'other',
+  creatorId: 1,
+  modalVisible: false,
+};
+
+const work = I.Record(work_object);
+
+class Work extends work {}
+
 
 //User
 const user_data = {
@@ -53,7 +72,7 @@ const user_data = {
 
 //Works
 const works_data = [{
-    id: 1,
+    id: 0,
     title: '自伝',
     date: '2017-5-22',
     description: '私の最初の作品です',
@@ -62,7 +81,21 @@ const works_data = [{
     released: true,
     creator: 'other',
     creatorId: 1,
-  }];
+    modalVisible: false,
+  },{
+      id: 1,
+      title: '第二作',
+      date: '2017-5-22',
+      description: '私の２番目の作品です',
+      eventName: 'my Event',
+      image: '',
+      released: true,
+      creator: 'other',
+      creatorId: 1,
+      modalVisible: false,
+    }];
+
+
 
 
 
@@ -126,9 +159,21 @@ const user = (state = I.fromJS(user_data), action) => {
 };
 
 const works = (state = I.fromJS(works_data), action) => {
-    switch (action.type) {
-        default:
-            return state;
+  switch (action.type) {
+      case MODAL_TOGGLE_CHANGE:
+        const num = action.id;
+        return state.setIn([num, 'modalVisible'], !state.getIn([num, 'modalVisible']))
+        // return state.update(num, function(modalVisible) {
+        //     return {modalVisible: modalVisible};
+        // });
+        // const newWork = new Work ({
+        //         modalVisible: !state.getIn([num, 'modalVisible']),
+        //     });
+        //   return state.merge(I.fromJS({
+        //       num: newWork,
+        //     }));
+      default:
+          return state;
     }
 };
 
