@@ -2,8 +2,6 @@ import React from "react";
 import { Modal, Button, Icon, DatePicker } from 'antd';
 import { connect } from 'react-redux';
 const ButtonGroup = Button.Group;
-// import { bindActionCreators } from 'redux';
-// import { Provider } from 'react-redux';
 import { modalToggleChange } from '../action.js';
 import { Col } from 'react-bootstrap';
 

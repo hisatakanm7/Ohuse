@@ -1,4 +1,10 @@
-div.container div div.mypage-follows {
-  border-bottom: 3px;
-  border-color: #ffce6c;
+div div {
+  img.follow_img: {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+#test {
+  background-color: #ccc;
 }

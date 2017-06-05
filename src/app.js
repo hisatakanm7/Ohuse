@@ -18,28 +18,26 @@ import ContainerWorks from './components/Works.js';
 import ContainerRoot from './Root.js';
 import ContainerMyPage from './components/MyPage.js';
 import styles from './scss/index.scss'
-import { Grid } from 'react-bootstrap';
-
+import { Layout } from 'antd';
+const { Header, Footer, Sider, Content } = Layout;
 const store = configureStore();
 
 
 //Routingの定義
 const appRouting = (
   <Router>
-      <div>
-          <div className="header">
-            ヘッダー
-          </div>
-          <Grid>
-            <Route exact path="/" component={ContainerRoot}/>
-            <Route path="/work" component={ContainerWorks} />
-            <Route path="/my_page" component={ContainerMyPage} />
-          </Grid>
-          <div className="footer">
-            <Link to="/work">Work</Link>
-            <Link to="/my_page">my page</Link>
-          </div>
-      </div>
+      <Layout>
+        <Header className="header">ヘッダー</Header>
+        <Content>
+          <Route exact path="/" component={ContainerRoot}/>
+          <Route path="/work" component={ContainerWorks} />
+          <Route path="/my_page" component={ContainerMyPage} />
+        </Content>
+        <Footer>
+          <Link to="/work">Work</Link>
+          <Link to="/my_page">my page</Link>
+        </Footer>
+      </Layout>
   </Router>
 );
 

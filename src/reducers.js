@@ -163,15 +163,6 @@ const works = (state = I.fromJS(works_data), action) => {
       case MODAL_TOGGLE_CHANGE:
         const num = action.id;
         return state.setIn([num, 'modalVisible'], !state.getIn([num, 'modalVisible']))
-        // return state.update(num, function(modalVisible) {
-        //     return {modalVisible: modalVisible};
-        // });
-        // const newWork = new Work ({
-        //         modalVisible: !state.getIn([num, 'modalVisible']),
-        //     });
-        //   return state.merge(I.fromJS({
-        //       num: newWork,
-        //     }));
       default:
           return state;
     }
