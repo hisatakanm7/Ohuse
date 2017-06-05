@@ -1,0 +1,17 @@
+*{margin: 0; padding: 0;}
+body {
+  background: linear-gradient(173deg, #ffffff, #ffead9);
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  body {
+    background-position: top center;
+    background-size: 992px auto;
+  }
+}
+@media (min-width: 992px) {
+  body {
+    background-size: 100% auto;
+  }
+}
