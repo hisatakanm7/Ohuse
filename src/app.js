@@ -15,8 +15,10 @@ import { addList } from './action.js';
 import configureStore from './configureStore.js'
 import Pick from './components/Pick.js';
 import ContainerWorks from './components/Works.js';
-import ContainerAppli from './Login.js';
+import ContainerRoot from './Root.js';
 import ContainerMyPage from './components/MyPage.js';
+import styles from './scss/index.scss'
+import { Grid } from 'react-bootstrap';
 
 const store = configureStore();
 
@@ -24,14 +26,20 @@ const store = configureStore();
 //Routingの定義
 const appRouting = (
   <Router>
-    <div>
-      <Link to="/work">Work</Link>
-      <Link to="/my_page">my page</Link>
-      <Route exact path="/" component={ContainerAppli}/>
-      <Route path="/pick" component={Pick} />
-      <Route path="/work" component={ContainerWorks} />
-      <Route path="/my_page" component={ContainerMyPage} />
-    </div>
+      <div>
+          <div className="header">
+            ヘッダー
+          </div>
+          <Grid>
+            <Route exact path="/" component={ContainerRoot}/>
+            <Route path="/work" component={ContainerWorks} />
+            <Route path="/my_page" component={ContainerMyPage} />
+          </Grid>
+          <div className="footer">
+            <Link to="/work">Work</Link>
+            <Link to="/my_page">my page</Link>
+          </div>
+      </div>
   </Router>
 );
 

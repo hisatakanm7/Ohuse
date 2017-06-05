@@ -1,6 +1,6 @@
 import React from 'react';
 import { Calendar } from 'antd';
-import styles from '../calender.scss'
+// import styles from '../calender.scss'
 import moment from 'moment';
 
 // It's recommended to set locale in entry file globaly.

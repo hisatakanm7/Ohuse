@@ -1,5 +1,6 @@
 div div.ant-btn-group {
   display: block;
+  margin: 3px 0;
   button.btn-date {
     padding: 0;
     background-color: #ffce6c;
@@ -7,14 +8,24 @@ div div.ant-btn-group {
     span {
       color: #fff;
       margin: auto;
+      width: 10%;
     }
   }
   button.btn-title {
     padding: 0;
     border-color: #ffce6c;
+    width: 90%;
+    span {
+      text-align: left;
+      width: 100%;
+      margin-right: auto;
+    }
   }
   button.btn-title:hover {
     background-color: #ffce6c;
+    span {
+      color: #fff;
+    }
   }
 }
 

@@ -5,7 +5,8 @@ import { Provider } from 'react-redux';
 import { Link, hashHistory } from "react-router";
 import axios from "axios";
 import ContainerWork from './Work.js';
-import styles from '../scss/Work.scss'
+import styles from '../scss/Work.scss';
+import { Button, Row } from 'react-bootstrap';
 
 
 export class Works extends React.Component {
@@ -18,12 +19,13 @@ export class Works extends React.Component {
         });
         return (
             <div>
-                <div className="mypage-follows">
+                <Row className="mypage-follows">
+                 <Button bsStyle="primary">Primary</Button>
                     ここにfolowが入る
-                </div>
-                <div>
-                    {myWorks}
-                </div>
+                </Row>
+                <Row>
+                  { myWorks }
+                </Row>
             </div>
         )
 
