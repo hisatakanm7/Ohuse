@@ -1,9 +1,8 @@
 import React from "react";
-import { Modal, Button, Icon, DatePicker } from 'antd';
+import { Modal, Button, Icon, DatePicker, Col } from 'antd';
 import { connect } from 'react-redux';
 const ButtonGroup = Button.Group;
 import { modalToggleChange } from '../action.js';
-import { Col } from 'react-bootstrap';
 
 export class Work extends React.Component {
     render() {
@@ -12,24 +11,22 @@ export class Work extends React.Component {
       }
       const { work, num, modalToggleChange } = this.props;
         return (
-          <Col xs={12}>
-            <ButtonGroup className="work">
-              <Button className="btn-date">{ work.date }</Button>
-              <Button className="btn-title" onClick={() => modalToggleChange(work.id)}>{ work.title }</Button>
-              <Modal
-                title="20px to Top"
-                style={{ top: 20 }}
-                visible={work.modalVisible}
-                onOk={() => modalToggleChange(work.id)}
-                onCancel={() => modalToggleChange(work.id)}
-              >
-                <DatePicker onChange={onChange} />
-                <p>some contents...</p>
-                <p>some contents...</p>
-                <p>some contents...</p>
-              </Modal>
-            </ButtonGroup>
-          </Col>
+          <ButtonGroup className="work">
+            <Button className="btn-date">{ work.date }</Button>
+            <Button className="btn-title" onClick={() => modalToggleChange(work.id)}><img src="../images/photo1.png"/>{ work.title }</Button>
+            <Modal
+              title="20px to Top"
+              style={{ top: 20 }}
+              visible={work.modalVisible}
+              onOk={() => modalToggleChange(work.id)}
+              onCancel={() => modalToggleChange(work.id)}
+            >
+              <DatePicker onChange={onChange} />
+              <p>some contents...</p>
+              <p>some contents...</p>
+              <p>some contents...</p>
+            </Modal>
+          </ButtonGroup>
         )
     }
 }

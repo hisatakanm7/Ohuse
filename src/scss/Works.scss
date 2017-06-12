@@ -1,10 +1,81 @@
-div div {
-  img.follow_img: {
+#test {
+  background-color: #ccc;
+}
+
+div div.follow_img {
+  //follow一覧の丸画像
+  img {
     width: 100%;
+    height: auto;
+    -webkit-border-radius: 50%;/* 50%でもOK */
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+  }
+  //もっとみるボタン
+  #show_more_box:before {
+    display: block;
+    padding-top: 100%;
+
+  }
+  .show_more {
+    font-size: 3vw;
+    position: absolute;
+    border: none;
+    top: 0;
+    left: 0;
+    width: 90%;
     height: 100%;
+    background-color: #ffead9;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
   }
 }
 
-#test {
-  background-color: #ccc;
+.selected_follow:before {
+  display: block;
+  padding-top: 100%;
+  .selected_follow_inner {
+    font-size: 3px;
+    position: absolute;
+    border: none;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: #aaa;
+    // background-image: url(../images/photo.png);
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+  }
+}
+
+.modal_style {
+  // background-color: black;
+  // opacity: 0.8;
+  // color: white;
+  div.ant-modal-content {
+    button.ant-modal-close {
+      span.ant-modal-close-x {
+        color: white;
+      }
+    }
+    div.ant-modal-header {
+      background-color: black;
+      opacity: 0.8;
+      border-bottom-color: black;
+      div.ant-modal-title {
+        color: white;
+      }
+    }
+    div.ant-modal-body {
+      border-top-color: black;
+      background-color: black;
+      opacity: 0.8;
+      color: white;
+      text-align: center;
+      font-size: 1vw;
+      word-wrap: break-word;
+    }
+  }
 }

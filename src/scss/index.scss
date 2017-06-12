@@ -15,55 +15,7 @@ body {
     background-size: 100% auto;
   }
 }
-
+//背景
 div.ant-layout-content {
   background: linear-gradient(173deg, #ffffff, #ffead9);
-}
-
-div div.follow_img {
-  img {
-    width: 100%;
-    height: auto;
-    -webkit-border-radius: 50%;/* 50%でもOK */
-    -moz-border-radius: 50%;
-    border-radius: 50%;
-  }
-  #show_more_box:before {
-    display: block;
-    padding-top: 100%;
-
-  }
-  .show_more {
-    font-size: 3vw;
-    position: absolute;
-    border: none;
-    top: 0;
-    left: 0;
-    width: 90%;
-    height: 100%;
-    background-color: #ffead9;
-    color: white;
-    text-align: center;
-    vertical-align: middle;
-  }
-  // .modal_style {
-  //   background-color: black;
-  //   opacity: 0.8;
-  //   color: white;
-  //   div.ant-modal-content {
-  //     background-color: black;
-  //     opacity: 0.8;
-  //     color: white;
-  //     div.ant-modal-body {
-  //       background-color: black;
-  //       opacity: 0.8;
-  //       color: white;
-  //       p {
-  //         background-color: black;
-  //         opacity: 0.8;
-  //         color: white;
-  //       }
-  //     }
-  //   }
-  // }
 }

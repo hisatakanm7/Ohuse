@@ -3,6 +3,7 @@ div div.ant-btn-group {
   margin: 3px 0;
   button.btn-date {
     padding: 0;
+    border-color: #ffce6c;
     background-color: #ffce6c;
     pointer-events: none;
     span {
@@ -15,6 +16,13 @@ div div.ant-btn-group {
     padding: 0;
     border-color: #ffce6c;
     width: 90%;
+    img {
+      width: 8%;
+      height: auto;
+      -webkit-border-radius: 50%;/* 50%でもOK */
+      -moz-border-radius: 50%;
+      border-radius: 50%;
+    }
     span {
       text-align: left;
       width: 100%;
