@@ -19,7 +19,7 @@ import ContainerRoot from './Root.js';
 import ContainerMyPage from './components/MyPage.js';
 import styles from './scss/index.scss'
 import { Layout } from 'antd';
-const { Header, Footer, Sider, Content } = Layout;
+const { Header, Footer, Sider, Content, Menu } = Layout;
 const store = configureStore();
 
 
@@ -27,7 +27,19 @@ const store = configureStore();
 const appRouting = (
   <Router>
       <Layout>
-        <Header className="header">ヘッダー</Header>
+        <div className="header">
+        <div className="icon_text">
+          ○fuse
+        </div>
+        <div className="header_right">
+          <div className="header_right_content">
+            <img src="./images/twitter-logo.png"/>
+            <div className="header_right_text">
+              ログイン/新規登録
+            </div>
+          </div>
+        </div>
+        </div>
         <Content>
           <Route exact path="/" component={ContainerRoot}/>
           <Route path="/work" component={ContainerWorks} />
