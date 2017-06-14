@@ -18,7 +18,7 @@ import ContainerWorks from './components/Works.js';
 import ContainerRoot from './Root.js';
 import ContainerMyPage from './components/MyPage.js';
 import styles from './scss/index.scss'
-import { Layout } from 'antd';
+import { Layout, Icon } from 'antd';
 const { Header, Footer, Sider, Content, Menu } = Layout;
 const store = configureStore();
 
@@ -45,10 +45,11 @@ const appRouting = (
           <Route path="/work" component={ContainerWorks} />
           <Route path="/my_page" component={ContainerMyPage} />
         </Content>
-        <Footer>
-          <Link to="/work">Work</Link>
-          <Link to="/my_page">my page</Link>
-        </Footer>
+        <div id="footer">
+          <Link to="/work"><Icon type="home" /></Link>
+          <Link to="/work"><Icon type="user" /></Link>
+          <Link to="/work"><Icon type="bars"  style={{color: 'red'}}/></Link>
+        </div>
       </Layout>
   </Router>
 );
@@ -63,23 +64,3 @@ ReactDom.render((
         {appRouting}
     </Provider>
 ), document.getElementById('root'));
-
-// const mapStateToProps = (state) => {
-//     const { page } = state;
-//     return {
-//         page: page
-//     };
-// };
-//
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         addList: e => dispatch(addList(e))
-//     };
-// };
-//
-// const ContainerBox = connect(
-//     mapStateToProps,
-//     mapDispatchToProps
-// )(Page);
-//
-// export default ContainerBox;
