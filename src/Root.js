@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux';
-import ContainerHeader from './Header.js';
+
 
 import { Link, hashHistory } from 'react-router-dom'
 import axios from "axios";
