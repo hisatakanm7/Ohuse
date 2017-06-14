@@ -34,15 +34,8 @@ const mapStateToProps = (state) => {
     };
 };
 
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         toggleChangeFlag: (url, num) =>  dispatch(toggleChangeFlag(url, num))
-//     };
-// };
-
 const ContainerMyPage = connect(
     mapStateToProps,
-    // mapDispatchToProps
 )(MyPage);
 
 export default ContainerMyPage;
