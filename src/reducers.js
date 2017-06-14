@@ -84,9 +84,9 @@ const works_data = [{
     modalVisible: false,
   },{
       id: 1,
-      title: '第二作',
+      title: 'トランケイトトランケイトトランケイトトランケイトトランケイトトランケイトトランケイト',
       date: '22',
-      description: '私の２番目の作品です',
+      description: 'トランケイトトランケイトトランケイトトランケイトトランケイトトランケイトトランケイト',
       eventName: 'my Event',
       image: '',
       released: true,
