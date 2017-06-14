@@ -1,43 +1,46 @@
-div div.ant-btn-group {
-  display: block;
-  margin: 3px 0;
-  button.btn-date {
-    padding: 0;
-    border-color: #ffce6c;
-    background-color: #ffce6c;
-    pointer-events: none;
-    span {
-      color: #fff;
-      margin: auto;
-      width: 10%;
-    }
+div.follow_work {
+  width: 100%;
+  display: -webkit-flex;
+	display: flex;
+  margin-bottom: 2%;
+  border: medium solid #ffead9;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  border-radius: 7px;
+  box-sizing: border-box;
+  span.follow_work_date {
+    width: auto;
+    background-color: #ffead9;
+    font-size: 6vw;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
   }
-  button.btn-title {
-    padding: 0;
-    border-color: #ffce6c;
-    width: 90%;
+  span.follow_work_title {
+    padding-left: 2%;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex: 1;
+  	flex: 1;
+    font-size: 6vw;
+    background-color: white;
+    vertical-align: middle;
+    -webkit-align-items: center;
     img {
-      width: 8%;
+      width: 10%;
       height: auto;
-      -webkit-border-radius: 50%;/* 50%でもOK */
+      -webkit-border-radius: 50%;
       -moz-border-radius: 50%;
       border-radius: 50%;
     }
     span {
-      text-align: left;
-      width: 100%;
-      margin-right: auto;
-    }
-  }
-  button.btn-title:hover {
-    background-color: #ffce6c;
-    span {
-      color: #fff;
+      color: black;
+      font-size: 6vw;
     }
   }
 }
 
-div div.mypage-follows {
-  border-bottom: 3px;
-  border-color: #ffce6c;
-}
+// div div.mypage-follows {
+//   border-bottom: 3px;
+//   border-color: #ffce6c;
+// }

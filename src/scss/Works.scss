@@ -1,81 +1,151 @@
-#test {
-  background-color: #ccc;
+div.follow_img_group {
+  margin-bottom: 3%;
+  width: 100%;
+  padding : 2% 1%;
+  border-bottom: medium solid #ffead9;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  div.follow_img_box {
+    width: 13%;
+    img {
+      width: 100%;
+      height: auto;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      border-radius: 50%;
+    }
+    // #show_more_box {
+    //   background-color: #ffead9;
+    //   width: 100%;
+    //   height: auto;
+    //   -webkit-border-radius: 50%;/* 50%でもOK */
+    //   -moz-border-radius: 50%;
+    //   border-radius: 50%;
+    //
+    // }
+    #show_more_box:before {
+      display: block;
+      width: 100%;
+
+      padding-top: 100%;
+    }
+    // .show_more {
+    //   font-size: 3vw;
+    //   border: none;
+    //   width: 100%;
+    //   height: auto;
+    //   // background-color: #ffead9;
+    //   color: white;
+    //   text-align: center;
+    //   vertical-align: middle;
+    //   -webkit-border-radius: 50%;
+    //   -moz-border-radius: 50%;
+    //   border-radius: 50%;
+    // }
+    .show_more {
+      font-size: 3vw;
+      // position: absolute;
+      border: none;
+      // top: 0;
+      // left: 0;
+      width: 90%;
+      height: auto;
+      background-color: #ffead9;
+      // opacity: 0;
+      color: white;
+      text-align: center;
+      vertical-align: middle;
+      -webkit-border-radius: 50%;/* 50%でもOK */
+      -moz-border-radius: 50%;
+      border-radius: 50%;
+
+    }
+  }
+}
+//フォローが洗濯した時に出現する右側の小さいアイコン
+div.selected_follow {
+  img {
+    width: 80%;
+    height: auto;
+    -webkit-border-radius: 50%;/* 50%でもOK */
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+  }
+}
+
+div.modal_follow_group {
+  img {
+    width: 90%;
+    height: auto;
+    -webkit-border-radius: 50%;/* 50%でもOK */
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+  }
 }
 
 div div.follow_img {
   //follow一覧の丸画像
   img {
-    width: 100%;
+    width: 80%;
     height: auto;
     -webkit-border-radius: 50%;/* 50%でもOK */
     -moz-border-radius: 50%;
     border-radius: 50%;
   }
   //もっとみるボタン
-  #show_more_box:before {
-    display: block;
-    padding-top: 100%;
-
-  }
-  .show_more {
-    font-size: 3vw;
-    position: absolute;
-    border: none;
-    top: 0;
-    left: 0;
-    width: 90%;
-    height: 100%;
-    background-color: #ffead9;
-    color: white;
-    text-align: center;
-    vertical-align: middle;
-  }
+  // #show_more_box:before {
+  //   display: block;
+  //   padding-top: 100%;
+  //
+  // }
+  // .show_more {
+  //   font-size: 3vw;
+  //   position: absolute;
+  //   border: none;
+  //   top: 0;
+  //   left: 0;
+  //   width: 90%;
+  //   height: 100%;
+  //   background-color: #ffead9;
+  //   color: white;
+  //   text-align: center;
+  //   vertical-align: middle;
+  // }
 }
 
-.selected_follow:before {
-  display: block;
-  padding-top: 100%;
-  .selected_follow_inner {
-    font-size: 3px;
-    position: absolute;
-    border: none;
-    top: 0;
-    left: 0;
-    height: 100%;
-    background-color: #aaa;
-    // background-image: url(../images/photo.png);
-    color: white;
-    text-align: center;
-    vertical-align: middle;
-  }
+div.work_month {
+  border-bottom: thin solid #ffead9;
 }
-
-.modal_style {
-  // background-color: black;
-  // opacity: 0.8;
-  // color: white;
-  div.ant-modal-content {
-    button.ant-modal-close {
-      span.ant-modal-close-x {
-        color: white;
-      }
-    }
-    div.ant-modal-header {
+.your_follow_modal {
+  .modal-dialog {
+    .modal-content {
+      opacity: 0.7;
       background-color: black;
-      opacity: 0.8;
-      border-bottom-color: black;
-      div.ant-modal-title {
+      -webkit-border-radius: 7px;
+      -moz-border-radius: 7px;
+      border-radius: 7px;
+      .modal-body {
+        span.closeButtonFollow {
+          position: fixed;
+          top: 0;
+          right: 2%;
+          color: white;
+          font-family: Meiryo;
+          font-size: 7vw;
+        }
+        border-top: none;
+        background-color: black;
         color: white;
+        text-align: center;
+        font-size: 1vw;
+        word-wrap: break-word;
+        -webkit-border-radius: 7px;
+        -moz-border-radius: 7px;
+        border-radius: 7px;
       }
-    }
-    div.ant-modal-body {
-      border-top-color: black;
-      background-color: black;
-      opacity: 0.8;
-      color: white;
-      text-align: center;
-      font-size: 1vw;
-      word-wrap: break-word;
     }
   }
 }
