@@ -75,7 +75,6 @@ div.selected_follow {
     border-radius: 50%;
   }
 }
-
 div.modal_follow_group {
   img {
     width: 90%;
@@ -122,12 +121,19 @@ div.work_month {
 .your_follow_modal {
   .modal-dialog {
     .modal-content {
-      opacity: 0.7;
-      background-color: black;
+      background: rgba(0,0,0,0.7);
       -webkit-border-radius: 7px;
       -moz-border-radius: 7px;
       border-radius: 7px;
       .modal-body {
+        border-top: none;
+        color: white;
+        text-align: center;
+        font-size: 1vw;
+        word-wrap: break-word;
+        -webkit-border-radius: 7px;
+        -moz-border-radius: 7px;
+        border-radius: 7px;
         span.closeButtonFollow {
           position: fixed;
           top: 0;
@@ -136,15 +142,12 @@ div.work_month {
           font-family: Meiryo;
           font-size: 7vw;
         }
-        border-top: none;
-        background-color: black;
-        color: white;
-        text-align: center;
-        font-size: 1vw;
-        word-wrap: break-word;
-        -webkit-border-radius: 7px;
-        -moz-border-radius: 7px;
-        border-radius: 7px;
+        div {
+          div.your_follow_modal_title {
+            font-size: 5vw;
+            margin-bottom: 3%;
+          }
+        }
       }
     }
   }

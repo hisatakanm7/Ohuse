@@ -72,10 +72,10 @@ export class Works extends React.Component {
                 </Row>
                 <Modal show={this.state.modalFlag} className="your_follow_modal" >
                     <Modal.Body>
-                    <span className="closeButtonFollow" onClick={() => this.setState({modalFlag: !this.state.modalFlag})}>×</span>
-                      <Row gutter={1} type="flex">
-                        <Col span={4} className="modal_follow_group"><img src="../images/photo1.png"/><span>fdafsafsdffdaf</span></Col>
-                        <Col span={4} className="modal_follow_group"><img src="../images/photo2.png"/><span>test</span></Col>
+                      <span className="closeButtonFollow" onClick={() => this.setState({modalFlag: !this.state.modalFlag})}>×</span>
+                      <Row gutter={1} type="flex" justify="center">
+                        <Col span={24} className="your_follow_modal_">あなたのフォロー一覧</Col>
+                        <Col span={4} className="modal_follow_group"><img src="../images/photo2.png"/><span>一覧</span></Col>
                         <Col span={4} className="modal_follow_group"><img src="../images/photo3.png"/><span>test</span></Col>
                         <Col span={4} className="modal_follow_group"><img src="../images/photo4.png"/><span>test</span></Col>
                         <Col span={4} className="modal_follow_group"><img src="../images/photo5.png"/><span>test</span></Col>

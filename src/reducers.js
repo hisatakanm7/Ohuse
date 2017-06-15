@@ -26,7 +26,7 @@ class Work extends work {}
 const user_data = {
   info:{
     id: 1,
-    name: 'ヒサタカ',
+    name: 'ヒサタカ@お布施早くやりたい',
     TwID: 'hisataka',
     description: 'ofuse作りました',
     image: '',

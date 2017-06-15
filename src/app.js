@@ -18,18 +18,19 @@ import ContainerWorks from './components/Works.js';
 import ContainerRoot from './Root.js';
 import ContainerMyPage from './components/MyPage.js';
 import styles from './scss/index.scss'
-import { Layout, Icon } from 'antd';
+import { Layout, Icon, LocaleProvider } from 'antd';
 const { Header, Footer, Sider, Content, Menu } = Layout;
 const store = configureStore();
-
+import ja_JP from 'antd/lib/locale-provider/ja_JP';
 
 //Routingの定義
 const appRouting = (
   <Router>
+  <LocaleProvider locale={ja_JP}>
       <Layout>
         <div className="header">
         <div className="icon_text">
-          ○fuse
+          ○fuse一覧
         </div>
         <div className="header_right">
           <div className="header_right_content">
@@ -47,10 +48,11 @@ const appRouting = (
         </Content>
         <div id="footer">
           <Link to="/work"><Icon type="home" /></Link>
-          <Link to="/work"><Icon type="user" /></Link>
+          <Link to="/my_page"><Icon type="user" /></Link>
           <Link to="/work"><Icon type="bars"  style={{color: 'red'}}/></Link>
         </div>
       </Layout>
+      </LocaleProvider>
   </Router>
 );
 

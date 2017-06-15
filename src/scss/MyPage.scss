@@ -1,0 +1,70 @@
+div.profile_box {
+  background-color: orange;
+  padding: 3%;
+  div.profile_box_row {
+    div.profile_box_icon {
+      img {
+        width: 100%;
+        height: auto;
+        -webkit-border-radius: 5%;
+        -moz-border-radius: 5%;
+        border-radius: 5%;
+      }
+    }
+    div.profile_box_text {
+      color: white;
+      div.profile_name_and_id {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-justify-content: space-between;
+        justify-content: space-between;
+        vertical-align: bottom;
+        span.profile_name {
+          font-size: 4vw;
+          width: 60%;
+          vertical-align: bottom;
+        }
+        span.profile_id {
+          font-size: 2vw;
+          width: 35%;
+          vertical-align: bottom;
+        }
+      }
+      div.profile_description {
+        span {
+          font-size: 2vw;
+        }
+      }
+    }
+  }
+}
+div.profile_select {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  div.profile_select_box {
+    color: #fff;
+    font-size: 5vw;
+    span {
+      width: auto;
+      background-color: orange;
+      text-align: center;
+      vertical-align: middle;
+    }
+    span.profile_select_begin {
+      -webkit-border-radius: 5px 0 0 5px;
+      -moz-border-radius: 5px 0 0 5px;
+      border-radius: 5px 0 0 5px;
+    }
+    span.profile_select_end {
+      -webkit-border-radius: 0 5px 5px 0;
+      -moz-border-radius: 0 5px 5px 0;
+      border-radius: 0 5px 5px 0;
+    }
+  }
+  div.profile_select_box:not(:nth-child(1)) {
+    border-right: thin solid white;
+  }
+
+}

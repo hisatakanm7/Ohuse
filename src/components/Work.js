@@ -16,7 +16,7 @@ export class Work extends React.Component {
             <span className="follow_work_date">
               ２２
             </span>
-              <span className="follow_work_title" onClick={() => modalToggleChange(work.id)}>
+            <span className="follow_work_title" onClick={() => modalToggleChange(work.id)}>
               <img src="../images/photo1.png"/>
               <span className="follow_work_title_text">
                 {work.title}
