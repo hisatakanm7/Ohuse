@@ -1,8 +1,14 @@
-div.profile_box {
-  background-color: orange;
-  padding: 3%;
-  div.profile_box_row {
+div{
+  div.profile_box {
+    background-color: orange;
+    padding: 3%;
+    width: 100%;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
     div.profile_box_icon {
+      width: 27%;
       img {
         width: 100%;
         height: auto;
@@ -13,6 +19,7 @@ div.profile_box {
     }
     div.profile_box_text {
       color: white;
+      width: 70%;
       div.profile_name_and_id {
         display: -webkit-flex;
         display: flex;

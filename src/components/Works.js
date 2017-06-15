@@ -7,10 +7,7 @@ import axios from "axios";
 import ContainerWork from './Work.js';
 import workStyles from '../scss/Work.scss';
 import worksStyles from '../scss/Works.scss';
-import { Row, Col, Button } from 'antd';
-import { Modal } from 'react-bootstrap';
-
-
+import { Modal, Grid, Row, Col } from 'react-bootstrap';
 
 export class Works extends React.Component {
     constructor() {
@@ -47,51 +44,46 @@ export class Works extends React.Component {
                   <div className="follow_img_box">
                     <img src="../images/photo6.png"/>
                   </div>
-                  <div className="follow_img_box">
-                    <div id="show_more_box">
-                      <Button className="show_more" onClick={() => this.setState({modalFlag: !this.state.modalFlag})}>もっと<br />みる</Button>
-                    </div>
+                  <div className="follow_img_box" onClick={() => this.setState({modalFlag: !this.state.modalFlag})}>
+                    <img src="../images/photo6.png"/>
                   </div>
                 </div>
-                {/*一旦ここに作ったが、workを内包してるのと同じdivの中に作る*/}
-                <Row type="flex" justify="center">
-                  <Col span={23} className="work_month">
-                    5月
-                  </Col>
-                </Row>
-
-                <Row gutter={5} type="flex" justify="center">
-                  <Col span={21}>
+                <Grid>
+                <Row className="follow_works_box1">
+                  <Col xs={11} className="follow_works_box">
                     { myWorks }
                   </Col>
-                  <Col span={2} className="selected_follow">
+                  <Col xs={1} className="selected_follow">
                     <img src="../images/photo1.png"/>
                     <img src="../images/photo2.png"/>
                     <img src="../images/photo6.png"/>
                   </Col>
                 </Row>
+                </Grid>
                 <Modal show={this.state.modalFlag} className="your_follow_modal" >
-                    <Modal.Body>
-                      <span className="closeButtonFollow" onClick={() => this.setState({modalFlag: !this.state.modalFlag})}>×</span>
-                      <Row gutter={1} type="flex" justify="center">
-                        <Col span={24} className="your_follow_modal_">あなたのフォロー一覧</Col>
-                        <Col span={4} className="modal_follow_group"><img src="../images/photo2.png"/><span>一覧</span></Col>
-                        <Col span={4} className="modal_follow_group"><img src="../images/photo3.png"/><span>test</span></Col>
-                        <Col span={4} className="modal_follow_group"><img src="../images/photo4.png"/><span>test</span></Col>
-                        <Col span={4} className="modal_follow_group"><img src="../images/photo5.png"/><span>test</span></Col>
-                        <Col span={4} className="modal_follow_group"><img src="../images/photo6.png"/><span>test</span></Col>
-                        <Col span={4} className="modal_follow_group"><img src="../images/photo1.png"/><span>test</span></Col>
-                        <Col span={4} className="modal_follow_group"><img src="../images/photo2.png"/><span>test</span></Col>
-                        <Col span={4} className="modal_follow_group"><img src="../images/photo3.png"/><span>test</span></Col>
-                        <Col span={4} className="modal_follow_group"><img src="../images/photo4.png"/><span>test</span></Col>
-                        <Col span={4} className="modal_follow_group"><img src="../images/photo5.png"/><span>test</span></Col>
-                        <Col span={4} className="modal_follow_group"><img src="../images/photo6.png"/><span>test</span></Col>
-                        <Col span={4} className="modal_follow_group"><img src="../images/photo1.png"/><span>test</span></Col>
-                        <Col span={4} className="modal_follow_group"><img src="../images/photo2.png"/><span>test</span></Col>
-                        <Col span={4} className="modal_follow_group"><img src="../images/photo3.png"/><span>test</span></Col>
+                  <Modal.Body>
+                    <span className="closeButtonFollow" onClick={() => this.setState({modalFlag: !this.state.modalFlag})}>×</span>
+                    <Grid>
+                      <Row>
+                        <Col xs={12} className="your_follow_modal_">あなたのフォロー一覧</Col>
+                        <Col xs={2} className="modal_follow_group"><img src="../images/photo2.png"/><span>一覧</span></Col>
+                        <Col xs={2} className="modal_follow_group"><img src="../images/photo3.png"/><span>test</span></Col>
+                        <Col xs={2} className="modal_follow_group"><img src="../images/photo4.png"/><span>test</span></Col>
+                        <Col xs={2} className="modal_follow_group"><img src="../images/photo5.png"/><span>test</span></Col>
+                        <Col xs={2} className="modal_follow_group"><img src="../images/photo6.png"/><span>test</span></Col>
+                        <Col xs={2} className="modal_follow_group"><img src="../images/photo1.png"/><span>test</span></Col>
+                        <Col xs={2} className="modal_follow_group"><img src="../images/photo2.png"/><span>test</span></Col>
+                        <Col xs={2} className="modal_follow_group"><img src="../images/photo3.png"/><span>test</span></Col>
+                        <Col xs={2} className="modal_follow_group"><img src="../images/photo4.png"/><span>test</span></Col>
+                        <Col xs={2} className="modal_follow_group"><img src="../images/photo5.png"/><span>test</span></Col>
+                        <Col xs={2} className="modal_follow_group"><img src="../images/photo6.png"/><span>test</span></Col>
+                        <Col xs={2} className="modal_follow_group"><img src="../images/photo1.png"/><span>test</span></Col>
+                        <Col xs={2} className="modal_follow_group"><img src="../images/photo2.png"/><span>test</span></Col>
+                        <Col xs={2} className="modal_follow_group"><img src="../images/photo3.png"/><span>test</span></Col>
                       </Row>
-                    </Modal.Body>
-                  </Modal>
+                    </Grid>
+                  </Modal.Body>
+                </Modal>
             </div>
         )
     }

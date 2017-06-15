@@ -3,21 +3,22 @@ div.follow_work {
   display: -webkit-flex;
 	display: flex;
   margin-bottom: 2%;
-  border: medium solid #ffead9;
-  -webkit-border-radius: 7px;
-  -moz-border-radius: 7px;
-  border-radius: 7px;
-  box-sizing: border-box;
-  span.follow_work_date {
-    width: auto;
-    background-color: #ffead9;
+  border: none;
+  div.follow_work_date {
+    width: 10%;
+    background-color: orange;
     font-size: 6vw;
     color: #fff;
     text-align: center;
     vertical-align: middle;
+    border: medium solid orange;
+    -webkit-border-radius: 7px 0 0 7px;
+    -moz-border-radius: 7px 0 0 7px;
+    border-radius: 7px 0 0 7px;
   }
-  span.follow_work_title {
+  div.follow_work_title {
     padding-left: 2%;
+    width: 85%;
     display: -webkit-flex;
     display: flex;
     -webkit-flex: 1;
@@ -26,6 +27,11 @@ div.follow_work {
     background-color: white;
     vertical-align: middle;
     -webkit-align-items: center;
+    border: medium solid orange;
+    -webkit-border-radius: 0 7px 7px 0;
+    -moz-border-radius: 0 7px 7px 0;
+    border-radius: 0 7px 7px 0;
+    border-left: none;
     img {
       width: 10%;
       height: auto;
@@ -39,8 +45,3 @@ div.follow_work {
     }
   }
 }
-
-// div div.mypage-follows {
-//   border-bottom: 3px;
-//   border-color: #ffce6c;
-// }

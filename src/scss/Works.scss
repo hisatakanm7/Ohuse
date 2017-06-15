@@ -17,62 +17,19 @@ div.follow_img_group {
       -moz-border-radius: 50%;
       border-radius: 50%;
     }
-    // #show_more_box {
-    //   background-color: #ffead9;
-    //   width: 100%;
-    //   height: auto;
-    //   -webkit-border-radius: 50%;/* 50%でもOK */
-    //   -moz-border-radius: 50%;
-    //   border-radius: 50%;
-    //
-    // }
-    #show_more_box:before {
-      display: block;
-      width: 100%;
-
-      padding-top: 100%;
-    }
-    // .show_more {
-    //   font-size: 3vw;
-    //   border: none;
-    //   width: 100%;
-    //   height: auto;
-    //   // background-color: #ffead9;
-    //   color: white;
-    //   text-align: center;
-    //   vertical-align: middle;
-    //   -webkit-border-radius: 50%;
-    //   -moz-border-radius: 50%;
-    //   border-radius: 50%;
-    // }
-    .show_more {
-      font-size: 3vw;
-      // position: absolute;
-      border: none;
-      // top: 0;
-      // left: 0;
-      width: 90%;
-      height: auto;
-      background-color: #ffead9;
-      // opacity: 0;
-      color: white;
-      text-align: center;
-      vertical-align: middle;
-      -webkit-border-radius: 50%;/* 50%でもOK */
-      -moz-border-radius: 50%;
-      border-radius: 50%;
-
-    }
   }
 }
 //フォローが洗濯した時に出現する右側の小さいアイコン
 div.selected_follow {
+  padding-left: 0;
+  padding-right: 1%;
   img {
-    width: 80%;
+    width: 100%;
     height: auto;
     -webkit-border-radius: 50%;/* 50%でもOK */
     -moz-border-radius: 50%;
     border-radius: 50%;
+    margin-bottom: 10%;
   }
 }
 div.modal_follow_group {
@@ -94,25 +51,6 @@ div div.follow_img {
     -moz-border-radius: 50%;
     border-radius: 50%;
   }
-  //もっとみるボタン
-  // #show_more_box:before {
-  //   display: block;
-  //   padding-top: 100%;
-  //
-  // }
-  // .show_more {
-  //   font-size: 3vw;
-  //   position: absolute;
-  //   border: none;
-  //   top: 0;
-  //   left: 0;
-  //   width: 90%;
-  //   height: 100%;
-  //   background-color: #ffead9;
-  //   color: white;
-  //   text-align: center;
-  //   vertical-align: middle;
-  // }
 }
 
 div.work_month {
@@ -142,13 +80,27 @@ div.work_month {
           font-family: Meiryo;
           font-size: 7vw;
         }
-        div {
+        div div {
           div.your_follow_modal_title {
             font-size: 5vw;
             margin-bottom: 3%;
+          }
+          .modal_follow_group {
+            padding-left: 2%;
+            padding-right: 2%;
+            img {
+              width: 100%;
+              height: auto;
+              -webkit-border-radius: 50%;/* 50%でもOK */
+              -moz-border-radius: 50%;
+              border-radius: 50%;
+            }
           }
         }
       }
     }
   }
+}
+div.follow_works_box {
+  padding-right: 1%;
 }
