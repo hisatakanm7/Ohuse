@@ -49,7 +49,7 @@ export class Works extends React.Component {
                   </div>
                 </div>
                 <Grid>
-                <Row className="follow_works_box1">
+                <Row>
                   <Col xs={11} className="follow_works_box">
                     { myWorks }
                   </Col>
@@ -63,25 +63,50 @@ export class Works extends React.Component {
                 <Modal show={this.state.modalFlag} className="your_follow_modal" >
                   <Modal.Body>
                     <span className="closeButtonFollow" onClick={() => this.setState({modalFlag: !this.state.modalFlag})}>×</span>
-                    <Grid>
-                      <Row>
-                        <Col xs={12} className="your_follow_modal_">あなたのフォロー一覧</Col>
-                        <Col xs={2} className="modal_follow_group"><img src="../images/photo2.png"/><span>一覧</span></Col>
-                        <Col xs={2} className="modal_follow_group"><img src="../images/photo3.png"/><span>test</span></Col>
-                        <Col xs={2} className="modal_follow_group"><img src="../images/photo4.png"/><span>test</span></Col>
-                        <Col xs={2} className="modal_follow_group"><img src="../images/photo5.png"/><span>test</span></Col>
-                        <Col xs={2} className="modal_follow_group"><img src="../images/photo6.png"/><span>test</span></Col>
-                        <Col xs={2} className="modal_follow_group"><img src="../images/photo1.png"/><span>test</span></Col>
-                        <Col xs={2} className="modal_follow_group"><img src="../images/photo2.png"/><span>test</span></Col>
-                        <Col xs={2} className="modal_follow_group"><img src="../images/photo3.png"/><span>test</span></Col>
-                        <Col xs={2} className="modal_follow_group"><img src="../images/photo4.png"/><span>test</span></Col>
-                        <Col xs={2} className="modal_follow_group"><img src="../images/photo5.png"/><span>test</span></Col>
-                        <Col xs={2} className="modal_follow_group"><img src="../images/photo6.png"/><span>test</span></Col>
-                        <Col xs={2} className="modal_follow_group"><img src="../images/photo1.png"/><span>test</span></Col>
-                        <Col xs={2} className="modal_follow_group"><img src="../images/photo2.png"/><span>test</span></Col>
-                        <Col xs={2} className="modal_follow_group"><img src="../images/photo3.png"/><span>test</span></Col>
-                      </Row>
-                    </Grid>
+                    <div className="modal_follow_title">
+                      <span>あなたのフォロー一覧</span>
+                    </div>
+                    <div className="flex_follow_images_box">
+                      <div className="flex_follow_image">
+                        <img src="../images/photo2.png"/><span>一覧</span>
+                      </div>
+                      <div className="flex_follow_image">
+                        <img src="../images/photo2.png"/><span>一覧fsfsdgasfdasfdsfas</span>
+                      </div>
+                      <div className="flex_follow_image">
+                        <img src="../images/photo2.png"/><span>一覧</span>
+                      </div>
+                      <div className="flex_follow_image">
+                        <img src="../images/photo2.png"/><span>一覧</span>
+                      </div>
+                      <div className="flex_follow_image">
+                        <img src="../images/photo2.png"/><span>一覧</span>
+                      </div>
+                      <div className="flex_follow_image">
+                        <img src="../images/photo2.png"/><span>一覧</span>
+                      </div>
+                      <div className="flex_follow_image">
+                        <img src="../images/photo2.png"/><span>一覧</span>
+                      </div>
+                      <div className="flex_follow_image">
+                        <img src="../images/photo2.png"/><span>一覧</span>
+                      </div>
+                      <div className="flex_follow_image">
+                        <img src="../images/photo2.png"/><span>一覧</span>
+                      </div>
+                      <div className="flex_follow_image">
+                        <img src="../images/photo2.png"/><span>一覧</span>
+                      </div>
+                      <div className="flex_follow_image">
+                        <img src="../images/photo2.png"/><span>一覧</span>
+                      </div>
+                      <div className="flex_follow_image">
+                        <img src="../images/photo2.png"/><span>一覧</span>
+                      </div>
+                      <div className="flex_follow_image">
+                        <img src="../images/photo2.png"/><span>一覧</span>
+                      </div>
+                    </div>
                   </Modal.Body>
                 </Modal>
             </div>

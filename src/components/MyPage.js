@@ -51,7 +51,7 @@ export class MyPage extends React.Component {
                 </span>
               </div>
             </div>
-            <div>
+            <div className="width90">
               { myWorks }
             </div>
           </div>

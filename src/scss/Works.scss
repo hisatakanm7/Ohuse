@@ -1,3 +1,4 @@
+//メイン画面のフォロー６人+もっと見るボタン
 div.follow_img_group {
   margin-bottom: 3%;
   width: 100%;
@@ -5,6 +6,8 @@ div.follow_img_group {
   border-bottom: medium solid #ffead9;
   display: -webkit-flex;
   display: flex;
+  -webkit-flex-wrap: nowrap; /* Safari */
+  flex-wrap:         nowrap;
   -webkit-justify-content: space-between;
   justify-content: space-between;
   -webkit-align-items: center;
@@ -19,7 +22,19 @@ div.follow_img_group {
     }
   }
 }
-//フォローが洗濯した時に出現する右側の小さいアイコン
+
+//work一つ一つを囲むdiv
+div.follow_works_box {
+  padding-right: 1%;
+}
+
+//月とその下線
+div.work_month {
+  border-bottom: thin solid #ffead9;
+}
+
+
+//フォローが選択した時に出現する右側の小さいアイコン
 div.selected_follow {
   padding-left: 0;
   padding-right: 1%;
@@ -32,30 +47,8 @@ div.selected_follow {
     margin-bottom: 10%;
   }
 }
-div.modal_follow_group {
-  img {
-    width: 90%;
-    height: auto;
-    -webkit-border-radius: 50%;/* 50%でもOK */
-    -moz-border-radius: 50%;
-    border-radius: 50%;
-  }
-}
 
-div div.follow_img {
-  //follow一覧の丸画像
-  img {
-    width: 80%;
-    height: auto;
-    -webkit-border-radius: 50%;/* 50%でもOK */
-    -moz-border-radius: 50%;
-    border-radius: 50%;
-  }
-}
-
-div.work_month {
-  border-bottom: thin solid #ffead9;
-}
+//フォロー一覧モーダル
 .your_follow_modal {
   .modal-dialog {
     .modal-content {
@@ -80,27 +73,38 @@ div.work_month {
           font-family: Meiryo;
           font-size: 7vw;
         }
-        div div {
-          div.your_follow_modal_title {
-            font-size: 5vw;
-            margin-bottom: 3%;
-          }
-          .modal_follow_group {
-            padding-left: 2%;
-            padding-right: 2%;
-            img {
-              width: 100%;
-              height: auto;
-              -webkit-border-radius: 50%;/* 50%でもOK */
-              -moz-border-radius: 50%;
-              border-radius: 50%;
-            }
+        .modal_follow_title {
+          width: auto;
+          margin: 7% auto;
+          span {
+            font-size: 7vw;
           }
         }
       }
     }
   }
 }
-div.follow_works_box {
-  padding-right: 1%;
+
+//汎用
+//followが並んでいる状態。丸画像とテキスト。
+.flex_follow_images_box {
+  display: -webkit-flex; /* Safari */
+  display: flex;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-flex-wrap: wrap; /* Safari */
+  flex-wrap:         wrap;
+  .flex_follow_image {
+    width: 16%;
+    img {
+      width: 100%;
+      height: auto;
+      -webkit-border-radius: 50%;/* 50%でもOK */
+      -moz-border-radius: 50%;
+      border-radius: 50%;
+    }
+    span {
+      font-size: 2vw;
+    }
+  }
 }
