@@ -2,17 +2,20 @@
 body {
   background: linear-gradient(173deg, #ffffff, #ffead9);
   width: 100%;
+  font-weight: lighter;
 }
 
 @media (min-width: 768px) {
   body {
     background-position: top center;
     background-size: 992px auto;
+    font-weight: lighter;
   }
 }
 @media (min-width: 992px) {
   body {
     background-size: 100% auto;
+    font-weight: lighter;
   }
 }
 //背景
@@ -21,7 +24,7 @@ div.ant-layout-content {
 }
 
 div.header {
-  background-color: #ffce6c;
+  background-color: rgba(255,187,75,1);
   width: 100%;
   padding-left: 2%;
   padding-right: 2%;
@@ -33,9 +36,17 @@ div.header {
   div.icon_text {
     color: #fff;
     font-size: 7vw;
+
   }
   div.header_right {
     width: 35%;
+    color: #fff;
+    display: flex;
+  justify-content: flex-end;
+    // .create_work {
+    //   margin-right: 0;
+    //   margin-left: auto;
+    // }
     div.header_right_content {
       width: 100%;
       padding: 1% 0.5%;
@@ -49,7 +60,6 @@ div.header {
       }
       div.header_right_text {
         vertical-align: middle;
-        color: #fff;
         font-size: 3vw;
         display: inline;
       }

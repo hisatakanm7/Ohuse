@@ -4,20 +4,16 @@ div.follow_img_group {
   width: 100%;
   padding : 2% 1%;
   border-bottom: medium solid #ffead9;
-  display: -webkit-flex;
   display: flex;
   -webkit-flex-wrap: nowrap; /* Safari */
   flex-wrap:         nowrap;
-  -webkit-justify-content: space-between;
   justify-content: space-between;
-  -webkit-align-items: center;
+  align-items: center;
   div.follow_img_box {
     width: 13%;
     img {
       width: 100%;
       height: auto;
-      -webkit-border-radius: 50%;
-      -moz-border-radius: 50%;
       border-radius: 50%;
     }
   }
@@ -41,8 +37,6 @@ div.selected_follow {
   img {
     width: 100%;
     height: auto;
-    -webkit-border-radius: 50%;/* 50%でもOK */
-    -moz-border-radius: 50%;
     border-radius: 50%;
     margin-bottom: 10%;
   }
@@ -53,17 +47,12 @@ div.selected_follow {
   .modal-dialog {
     .modal-content {
       background: rgba(0,0,0,0.7);
-      -webkit-border-radius: 7px;
-      -moz-border-radius: 7px;
       border-radius: 7px;
       .modal-body {
         border-top: none;
         color: white;
-        text-align: center;
         font-size: 1vw;
         word-wrap: break-word;
-        -webkit-border-radius: 7px;
-        -moz-border-radius: 7px;
         border-radius: 7px;
         span.closeButtonFollow {
           position: fixed;
@@ -75,36 +64,93 @@ div.selected_follow {
         }
         .modal_follow_title {
           width: auto;
-          margin: 7% auto;
-          span {
-            font-size: 7vw;
-          }
+          margin: 10px auto;
+          font-size: 7vw;
+          text-align: center;
         }
       }
     }
   }
 }
 
-//汎用
-//followが並んでいる状態。丸画像とテキスト。
-.flex_follow_images_box {
-  display: -webkit-flex; /* Safari */
+.work_modal_header {
   display: flex;
+  width: 100%;
+  border-bottom: thin solid gray;
   -webkit-justify-content: space-between;
   justify-content: space-between;
-  -webkit-flex-wrap: wrap; /* Safari */
-  flex-wrap:         wrap;
-  .flex_follow_image {
-    width: 16%;
+  margin-top: 5%;
+  padding-bottom: 2%;
+  .work_modal_header_icon {
+    width: 27%;
+    text-align: center;
     img {
       width: 100%;
       height: auto;
-      -webkit-border-radius: 50%;/* 50%でもOK */
-      -moz-border-radius: 50%;
+      border-radius: 50%;
+      margin-bottom: 7%;
+    }
+    span {
+      font-size: 2vw;
+    }
+  }
+  .work_modal_header_text {
+    width: 69%;
+    .work_modal_header_text_top {
+      display: flex;
+      width: 100%;
+      -webkit-justify-content: space-between;
+      justify-content: space-between;
+      align-items: center;
+      .work_modal_header_date {
+        width: 30%;
+        font-size: 4vw;
+      }
+      .work_modal_header_location {
+        width: 55%;
+      }
+    }
+    .work_modal_header_text_bottom {
+      .work_modal_header_title {
+        font-size: 8vw;
+      }
+    }
+  }
+}
+
+.work_modal_img {
+  width: 100%;
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+//汎用
+//followが並んでいる状態。丸画像とテキスト。
+.flex_follow_images_box {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap:         wrap;
+  font-size: 2vw;
+  .flex_follow_image {
+    width: 16%;
+    text-align: center;
+    margin-top: 2%;
+    img {
+      width: 100%;
+      height: auto;
       border-radius: 50%;
     }
     span {
       font-size: 2vw;
     }
+  }
+}
+
+.work_modal_body {
+  margin-top: 2%;
+  div {
+    margin-bottom: 2%
   }
 }

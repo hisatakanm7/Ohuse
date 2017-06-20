@@ -11,44 +11,47 @@ export class Work extends React.Component {
       const { work, num, modalToggleChange } = this.props;
         return (
           <div className="follow_work">
-            <div className="follow_work_date">
-              22
-            </div>
+              <span className="follow_work_date">22</span>
             <div className="follow_work_title" onClick={() => modalToggleChange(work.id)}>
               <img src="../images/photo1.png"/>
-              <span className="follow_work_title_text">
+              <div className="follow_work_title_text">
                 {work.title}
-              </span>
+              </div>
             </div>
-            <Modal show={work.modalVisible} onHide={() => modalToggleChange(work.id)} className="your_follow_modal" >
-              <Modal.Header closeButton>
-              <Grid>
-                <Row type="flex">
-                  <Col span={8} className="modal_follow_group"><img src="../images/photo1.png"/><span>test</span></Col>
-                  <Col span={12} className="modal_follow_group"><span>test</span></Col>
-                </Row>
-                </Grid>
-              </Modal.Header>
+            <Modal show={work.modalVisible} className="your_follow_modal" >
               <Modal.Body>
-              <Grid>
-              <Row>
-                <Col xs={12} className="your_follow_modal_">あなたのフォロー一覧</Col>
-                <Col xs={2} className="modal_follow_group"><img src="../images/photo2.png"/><span>一覧</span></Col>
-                <Col xs={2} className="modal_follow_group"><img src="../images/photo3.png"/><span>test</span></Col>
-                <Col xs={2} className="modal_follow_group"><img src="../images/photo4.png"/><span>test</span></Col>
-                <Col xs={2} className="modal_follow_group"><img src="../images/photo5.png"/><span>test</span></Col>
-                <Col xs={2} className="modal_follow_group"><img src="../images/photo6.png"/><span>test</span></Col>
-                <Col xs={2} className="modal_follow_group"><img src="../images/photo1.png"/><span>test</span></Col>
-                <Col xs={2} className="modal_follow_group"><img src="../images/photo2.png"/><span>test</span></Col>
-                <Col xs={2} className="modal_follow_group"><img src="../images/photo3.png"/><span>test</span></Col>
-                <Col xs={2} className="modal_follow_group"><img src="../images/photo4.png"/><span>test</span></Col>
-                <Col xs={2} className="modal_follow_group"><img src="../images/photo5.png"/><span>test</span></Col>
-                <Col xs={2} className="modal_follow_group"><img src="../images/photo6.png"/><span>test</span></Col>
-                <Col xs={2} className="modal_follow_group"><img src="../images/photo1.png"/><span>test</span></Col>
-                <Col xs={2} className="modal_follow_group"><img src="../images/photo2.png"/><span>test</span></Col>
-                <Col xs={2} className="modal_follow_group"><img src="../images/photo3.png"/><span>test</span></Col>
-              </Row>
-              </Grid>
+              <div className="work_modal_header">
+                <div className="work_modal_header_icon">
+                  <img src="../images/photo1.png"/>
+                  <span>やすゆき@5/26GLF</span>
+                </div>
+                <div className="work_modal_header_text">
+                  <div　className="work_modal_header_text_top">
+                    <span className="work_modal_header_date">
+                      5/26
+                    </span>
+                    <span className="work_modal_header_location">
+                      第二回全国お布施イベント
+                    </span>
+                  </div>
+                  <div　className="work_modal_header_text_bottom">
+                    <span className="work_modal_header_title">
+                      私のOFUSE
+                    </span>
+                  </div>
+                </div>
+                <span className="closeButtonFollow" onClick={() => modalToggleChange(work.id)}>×</span>
+              </div>
+              <div className="work_modal_body">
+                <div>
+                  <span>
+                    5/26の第二回全国お布施イベントにて、私のOFUSEの４巻を発売させていただきます！！１つ前の３巻から大分時間が経ってしまいましたが、今回は１巻まるまるあかね×絵里の内容となっております！
+                  </span>
+                </div>
+                <div className="work_modal_img">
+                  <img src="../images/kemohure.jpg"/>
+                </div>
+              </div>
               </Modal.Body>
             </Modal>
           </div>

@@ -13,11 +13,23 @@ export class Works extends React.Component {
     constructor() {
       super();
       this.state = {
-        modalFlag: false
+        modalFlag: false,
+        selected: false,
       };
     }
+
+
     render() {
       const { works } = this.props;
+      let work_width = 11;
+      let selected_follow_width = 1;
+      if (this.state.selected) {
+        work_width = 11;
+        selected_follow_width = 1;
+      } else {
+        work_width = 11;
+        selected_follow_width = 1;
+      }
       const myWorks = works.toJSON().map((work, key) => {
             return (
                 <ContainerWork work={work} num={key} key={key} />
@@ -25,90 +37,18 @@ export class Works extends React.Component {
         });
         return (
             <div>
-                <div className="follow_img_group">
-                  <div className="follow_img_box">
-                    <img src="../images/photo1.png"/>
-                  </div>
-                  <div className="follow_img_box">
-                    <img src="../images/photo2.png"/>
-                  </div>
-                  <div className="follow_img_box">
-                    <img src="../images/photo3.png"/>
-                  </div>
-                  <div className="follow_img_box">
-                    <img src="../images/photo4.png"/>
-                  </div>
-                  <div className="follow_img_box">
-                    <img src="../images/photo5.png"/>
-                  </div>
-                  <div className="follow_img_box">
-                    <img src="../images/photo6.png"/>
-                  </div>
-                  <div className="follow_img_box" onClick={() => this.setState({modalFlag: !this.state.modalFlag})}>
-                    <img src="../images/photo6.png"/>
-                  </div>
-                </div>
                 <Grid>
                 <Row>
-                  <Col xs={11} className="follow_works_box">
+                  <Col xs={work_width} className="follow_works_box">
                     { myWorks }
                   </Col>
-                  <Col xs={1} className="selected_follow">
-                    <img src="../images/photo1.png"/>
+                  <Col xs={selected_follow_width} className="selected_follow">
+                    <img src="../images/photo2.png"/>
                     <img src="../images/photo2.png"/>
                     <img src="../images/photo6.png"/>
                   </Col>
                 </Row>
                 </Grid>
-                <Modal show={this.state.modalFlag} className="your_follow_modal" >
-                  <Modal.Body>
-                    <span className="closeButtonFollow" onClick={() => this.setState({modalFlag: !this.state.modalFlag})}>×</span>
-                    <div className="modal_follow_title">
-                      <span>あなたのフォロー一覧</span>
-                    </div>
-                    <div className="flex_follow_images_box">
-                      <div className="flex_follow_image">
-                        <img src="../images/photo2.png"/><span>一覧</span>
-                      </div>
-                      <div className="flex_follow_image">
-                        <img src="../images/photo2.png"/><span>一覧fsfsdgasfdasfdsfas</span>
-                      </div>
-                      <div className="flex_follow_image">
-                        <img src="../images/photo2.png"/><span>一覧</span>
-                      </div>
-                      <div className="flex_follow_image">
-                        <img src="../images/photo2.png"/><span>一覧</span>
-                      </div>
-                      <div className="flex_follow_image">
-                        <img src="../images/photo2.png"/><span>一覧</span>
-                      </div>
-                      <div className="flex_follow_image">
-                        <img src="../images/photo2.png"/><span>一覧</span>
-                      </div>
-                      <div className="flex_follow_image">
-                        <img src="../images/photo2.png"/><span>一覧</span>
-                      </div>
-                      <div className="flex_follow_image">
-                        <img src="../images/photo2.png"/><span>一覧</span>
-                      </div>
-                      <div className="flex_follow_image">
-                        <img src="../images/photo2.png"/><span>一覧</span>
-                      </div>
-                      <div className="flex_follow_image">
-                        <img src="../images/photo2.png"/><span>一覧</span>
-                      </div>
-                      <div className="flex_follow_image">
-                        <img src="../images/photo2.png"/><span>一覧</span>
-                      </div>
-                      <div className="flex_follow_image">
-                        <img src="../images/photo2.png"/><span>一覧</span>
-                      </div>
-                      <div className="flex_follow_image">
-                        <img src="../images/photo2.png"/><span>一覧</span>
-                      </div>
-                    </div>
-                  </Modal.Body>
-                </Modal>
             </div>
         )
     }

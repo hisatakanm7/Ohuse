@@ -1,0 +1,15 @@
+.complete_button {
+  margin: 5px auto;
+}
+.complete_modal {
+  width: 100%;
+  padding-top: 50%;
+  padding-bottom: 50%;
+  display: flex; /* 子要素をflexboxで揃える */
+  flex-direction: column; /* 子要素をflexboxにより縦方向に揃える */
+  justify-content: center; /* 子要素をflexboxにより中央に配置する */
+  align-items: center;  /* 子要素をflexboxにより中央に配置する */
+  font-size: 8vw;
+  text-align: center;
+  vertical-align: center;
+}
