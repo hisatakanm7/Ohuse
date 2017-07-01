@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 const I = require('immutable');
 
 import { ADD_LIST } from './action';
-import { MODAL_TOGGLE_CHANGE } from './action';
+import { MODAL_TOGGLE_CHANGE, RECEIVE_LOGGED_IN, REQUEST_LOGGED_IN, RECEIVE_ERROR_LOGGED_IN } from './action';
 
 const work_object = {
   id: 0,
@@ -25,7 +25,7 @@ class Work extends work {}
 //User
 const user_data = {
   info:{
-    id: 1,
+    id: 10,
     name: 'ヒサタカ@お布施早くやりたい',
     TwID: 'hisataka',
     description: 'ofuse作りました',
@@ -315,14 +315,27 @@ const page_data = {
     name: 'name',
 };
 
-
-
 function append_list (arr, child) {
     const newPage = new PageUN({
         name: child.title,
         url: child.link[0]._href
     });
     arr.push(newPage);
+};
+
+const loading_data = {
+    loading: true,
+};
+
+const loading = (state = I.fromJS(loading_data), action) => {
+    switch (action.type) {
+      case REQUEST_LOGGED_IN:
+        return state.set('loading', action.loading);
+        case RECEIVE_ERROR_LOGGED_IN:
+          return state.set('loading', action.loading);
+      default:
+          return state;
+    }
 };
 
 const page = (state = I.fromJS(page_data), action) => {
@@ -338,21 +351,12 @@ const page = (state = I.fromJS(page_data), action) => {
     }
 };
 
-
-
-
-
-
-
-
-
-
-
-
 const user = (state = I.fromJS(user_data), action) => {
     switch (action.type) {
-        default:
-            return state;
+      case RECEIVE_LOGGED_IN:
+        return state.setIn(['info', 'id'], action.response.id);
+      default:
+          return state;
     }
 };
 
@@ -370,7 +374,8 @@ const works = (state = I.fromJS(works_data), action) => {
 const reducer = combineReducers({
     page,
     user,
-    works, //1つ1つのreducerを書く。増えたらここに追加する。
+    works,
+    loading, //1つ1つのreducerを書く。増えたらここに追加する。
 });
 
 export default reducer

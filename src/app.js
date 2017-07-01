@@ -24,34 +24,24 @@ import ContainerRoot from './Root.js';
 import Work from './components/Work.js';
 import styles from './scss/index.scss'
 import axios from "axios";
+import { comfirmLoggedIn, receiveLoggedIn } from './action';
 
 const store = configureStore();
 
 class App extends React.Component {
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     redirectToReferrer: true
-  //   };
-  // }
-  //
   componentWillMount() {
-    axios.get('http://localhost:3000/logged_in', {
-        withCredentials: true
-      })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    this.props.comfirmLoggedIn();
   }
 
     render() {
+      const { addList, receiveLoggedIn, comfirmLoggedIn } = this.props;
         return (
           <Router>
             <MuiThemeProvider>
               <div>
+              <button onClick={() => comfirmLoggedIn()}>
+                onClick
+                </button>
                 <ContainerHeader />
                 <Route exact path="/" component={ContainerTimeLine}/>
                 <Route path="/work" component={ContainerMyPage}/>
@@ -67,8 +57,28 @@ class App extends React.Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    const { works } = state;
+    return {
+        works: works
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+      addList: (e) =>  dispatch(addList(e)),
+      receiveLoggedIn: (e) =>  dispatch(receiveLoggedIn(e)),
+      comfirmLoggedIn: (e) =>  dispatch(comfirmLoggedIn(e))
+    };
+};
+
+const ContainerApp = connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(App);
+
 ReactDom.render((
     <Provider store={store}>
-        <App />
+        <ContainerApp />
     </Provider>
 ), document.getElementById('root'));
