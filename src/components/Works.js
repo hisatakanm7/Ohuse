@@ -18,7 +18,6 @@ export class Works extends React.Component {
       };
     }
 
-
     render() {
       const { works } = this.props;
       let work_width = 11;

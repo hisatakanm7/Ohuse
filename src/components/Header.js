@@ -11,6 +11,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import HeaderStyles from '../scss/Header.scss'
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import axios from "axios";
 
 export class Header extends React.Component {
     constructor() {
@@ -20,104 +21,115 @@ export class Header extends React.Component {
         modalFlag: false,
         date: null,
         time: null,
+        loggedIn: false,
       }
-
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleDate = this.handleDate.bind(this);
-    this.handleTime = this.handleTime.bind(this);
+      this.handleSubmit = this.handleSubmit.bind(this);
+      this.handleDate = this.handleDate.bind(this);
+      this.handleTime = this.handleTime.bind(this);
     }
+
     componentWillMount() {
       injectTapEventPlugin();
+      axios.get('http://ofuse-dev.ap-northeast-1.elasticbeanstalk.com/users.json')
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     }
 
     handleTime(event, time){
-    this.setState({time: time})
-  }
-
-  handleDate(event, date){
-    this.setState({date: date})
-  }
-
-  handleSubmit(event){
-    let momentTime = moment(this.state.time);
-    let momentDate = moment(this.state.date);
-    let renderedDateTime = moment({
-      year: momentDate.year(),
-      month: momentDate.month(),
-      day: momentDate.date(),
-      hour: momentTime.hours(),
-      minute: momentTime.minutes()
-  });
-    const newChore = {
-      date_time: renderedDateTime,
+      this.setState({time: time})
     }
-    this.props.actions.addEvent(newChore)
-    this.setState({date: null, time: null});
-  }
+
+    handleDate(event, date){
+      this.setState({date: date})
+    }
+
+    handleSubmit(event){
+      let momentTime = moment(this.state.time);
+      let momentDate = moment(this.state.date);
+      let renderedDateTime = moment({
+        year: momentDate.year(),
+        month: momentDate.month(),
+        day: momentDate.date(),
+        hour: momentTime.hours(),
+        minute: momentTime.minutes()
+      });
+      const newChore = {
+        date_time: renderedDateTime,
+      }
+      this.props.actions.addEvent(newChore)
+      this.setState({date: null, time: null});
+    }
 
     render() {
-    const actions = [
-      <FlatButton
-        label="Cancel"
-        primary={true}
-        onTouchTap={this.handleClose}
-      />,
-      <FlatButton
-        label="Submit"
-        primary={true}
-        type='submit'
-        onTouchTap={this.handleSubmit}
-      />,
-    ];
-    const styles = {
-      inputStyle: {
-        color: 'white',
-        WebkitTextFillColor : 'white',
-        fontSize: '5vw',
-      },
-      textareaStyle: {
-        color: 'white',
-        WebkitTextFillColor : 'white',
-        fontSize: '5vw',
-      },
-      hintStyle: {
-        color: 'gray',
-        WebkitTextFillColor : 'gray',
-        fontSize: '5vw',
-      },
-      errorStyle: {
-        color: 'white',
-        fontSize: '3vw',
-      },
-      underlineStyle: {
-        borderColor: 'white',
-      },
-      floatingLabelStyle: {
-        color: 'gray',
-        fontSize: '5vw',
-      },
-      floatingLabelFocusStyle: {
-        color: 'rgb(0,188,212)',
-        fontSize: '5vw',
-      },
-    };
+      const actions = [
+        <FlatButton
+          label="Cancel"
+          primary={true}
+          onTouchTap={this.handleClose}
+        />,
+        <FlatButton
+          label="Submit"
+          primary={true}
+          type='submit'
+          onTouchTap={this.handleSubmit}
+        />,
+      ];
+      const styles = {
+        inputStyle: {
+          color: 'white',
+          WebkitTextFillColor : 'white',
+          fontSize: '5vw',
+        },
+        textareaStyle: {
+          color: 'white',
+          WebkitTextFillColor : 'white',
+          fontSize: '5vw',
+        },
+        hintStyle: {
+          color: 'gray',
+          WebkitTextFillColor : 'gray',
+          fontSize: '5vw',
+        },
+        errorStyle: {
+          color: 'white',
+          fontSize: '3vw',
+        },
+        underlineStyle: {
+          borderColor: 'white',
+        },
+        floatingLabelStyle: {
+          color: 'gray',
+          fontSize: '5vw',
+        },
+        floatingLabelFocusStyle: {
+          color: 'rgb(0,188,212)',
+          fontSize: '5vw',
+        },
+      };
+      const header = (this.state.loggedIn) ?
+          <div className="create_work" onClick={() => this.setState({modalFlag: !this.state.modalFlag})}>
+            ＋
+          </div>
+        :
+          <div className="header_right_content">
+            <img src="./images/twitter-logo.png"/>
+            <div className="header_right_text">
+              <a href="http://localhost:3000/auth/twitter">ログイン/新規登録</a>
+            </div>
+          </div>
+        ;
+
         return (
           <div className="header">
             <div className="icon_text">
               ○fuse
             </div>
             <div className="header_right">
-            <div className="create_work" onClick={() => this.setState({modalFlag: !this.state.modalFlag})}>
-              ＋
-            </div>
-            {/*
-              <div className="header_right_content">
-                <img src="./images/twitter-logo.png"/>
-                <div className="header_right_text">
-                  ログイン/新規登録
-                </div>
-              </div>
-              */}
+            {header}
             </div>
             <Modal show={this.state.modalFlag} className="your_follow_modal" >
               <Modal.Body>
@@ -195,7 +207,6 @@ export class Header extends React.Component {
                 </div>
               </Modal.Body>
             </Modal>
-
           </div>
         )
     }
