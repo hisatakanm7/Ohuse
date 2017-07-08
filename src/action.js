@@ -3,6 +3,11 @@ export const MODAL_TOGGLE_CHANGE = 'MODAL_TOGGLE_CHANGE';
 export const RECEIVE_LOGGED_IN = 'RECEIVE_LOGGED_IN';
 export const RECEIVE_ERROR_LOGGED_IN = 'RECEIVE_ERROR_LOGGED_IN';
 export const REQUEST_LOGGED_IN = 'REQUEST_LOGGED_IN'
+export const CREATE_WORK_HANDLE = 'CREATE_WORK_HANDLE'
+export const RECEIVE_MY_WORKS = 'RECEIVE_MY_WORKS'
+export const RECEIVE_WORK = 'RECEIVE_WORK'
+export const RECEIVE_POSTS = 'RECEIVE_POSTS'
+
 import axios from "axios";
 
 
@@ -44,37 +49,36 @@ export const receiveErrorLoggedIn = (response) => {
   }
 };
 
+export const createWorkHandle = (key, value) => {
+    return {
+        type: 'CREATE_WORK_HANDLE',
+        key: key,
+        value: value
+    }
+};
 
+export const receiveMyWorks = (response) => {
+  console.log(response);
+  return {
+      type: 'RECEIVE_MY_WORKS',
+      response
+  }
+};
 
+export const receiveWork = (response) => {
+  console.log(response);
+  return {
+      type: 'RECEIVE_WORK',
+      response
+  }
+};
 
-
-export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 function receivePosts(subreddit, json) {
   return {
     type: RECEIVE_POSTS,
     subreddit,
     posts: json.data.children.map(child => child.data),
     receivedAt: Date.now()
-  }
-}
-
-function fetchPosts(subreddit) {
-  return dispatch => {
-    dispatch(requestLoggedIn())
-    return fetch(`https://www.reddit.com/r/${subreddit}.json`)
-      .then(response => response.json())
-      .then(json => dispatch(receivePosts(subreddit, json)))
-  }
-}
-
-function shouldFetchPosts(state, subreddit) {
-  const posts = state.postsBySubreddit[subreddit]
-  if (!posts) {
-    return true
-  } else if (posts.isFetching) {
-    return false
-  } else {
-    return posts.didInvalidate
   }
 }
 
@@ -86,7 +90,31 @@ export function comfirmLoggedIn() {
       return axios.get('http://localhost:3000/logged_in', {
           withCredentials: true
         })
-        .then(response => dispatch(receiveLoggedIn(response.data)))
+        .then(response => (
+          dispatch(receiveLoggedIn(response.data.user)),
+          dispatch(receiveMyWorks(response.data.works))
+      ))
+        .catch(() => dispatch(receiveErrorLoggedIn()));
+  }
+};
+
+// //actionとしてのfunctionは実行後に必ずtypeをreturnしないといけない
+export function createWorkAction(userId, params) {
+  console.log('userId');
+  console.log(userId);
+  console.log('params');
+  console.log(params);
+
+  return dispatch => {
+    dispatch(requestLoggedIn())
+    console.log('params');
+    console.log(params);
+      return axios.post(`http://localhost:3000/users/${userId}/works`, params, {
+          withCredentials: true
+        })
+        .then(response => (
+          dispatch(receiveWork(response.data.works))
+      ))
         .catch(() => dispatch(receiveErrorLoggedIn()));
   }
 };

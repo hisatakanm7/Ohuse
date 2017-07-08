@@ -33,8 +33,19 @@ class App extends React.Component {
     this.props.comfirmLoggedIn();
   }
 
+  handle(id){
+    // let url =
+    axios.post(`http://localhost:3000/users/${id}/works`, {
+        withCredentials: true
+      })
+      .then(response => console.log(response))
+      .catch(response => console.log(response));
+  }
+
+
     render() {
-      const { addList, receiveLoggedIn, comfirmLoggedIn } = this.props;
+      const { addList, receiveLoggedIn, comfirmLoggedIn, user } = this.props;
+      const userId = user.toJSON().info.id;
         return (
           <Router>
             <MuiThemeProvider>
@@ -42,6 +53,9 @@ class App extends React.Component {
               <button onClick={() => comfirmLoggedIn()}>
                 onClick
                 </button>
+                <button onClick={() => this.handle(userId)}>
+                  user
+                  </button>
                 <ContainerHeader />
                 <Route exact path="/" component={ContainerTimeLine}/>
                 <Route path="/work" component={ContainerMyPage}/>
@@ -58,9 +72,10 @@ class App extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    const { works } = state;
+    const { works, user } = state;
     return {
-        works: works
+        works: works,
+        user: user
     };
 };
 

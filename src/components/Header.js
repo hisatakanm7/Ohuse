@@ -12,72 +12,36 @@ import HeaderStyles from '../scss/Header.scss'
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import axios from "axios";
+import { createWorkHandle, createWorkAction } from '../action';
+import MomentFormat from './Moment.js';
+
 
 export class Header extends React.Component {
-    constructor() {
-      super();
+    constructor(props) {
+      super(props);
+      const date = new Date(this.props.create_work.toJSON().date);
       this.state = {
         completeModalFlag: false,
         modalFlag: false,
-        date: null,
-        time: null,
-        loggedIn: false,
+        date: date,
       }
       this.handleSubmit = this.handleSubmit.bind(this);
-      this.handleDate = this.handleDate.bind(this);
-      this.handleTime = this.handleTime.bind(this);
     }
-
     componentWillMount() {
       injectTapEventPlugin();
-      axios.get('http://ofuse-dev.ap-northeast-1.elasticbeanstalk.com/users.json')
-        .then(function (response) {
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
     }
-
-    handleTime(event, time){
-      this.setState({time: time})
+    handleSubmit(othuerState) {
+      this.setState({completeModalFlag: !this.state.completeModalFlag})
     }
-
-    handleDate(event, date){
-      this.setState({date: date})
+    createWork(){
+      this.setState({modalFlag: !this.state.modalFlag, completeModalFlag: !this.state.completeModalFlag})
+      console.log(this.props.user.toJSON().info.id);
+      console.log(this.props.create_work.toJSON());
+      this.props.createWorkAction(this.props.user.toJSON().info.id, this.props.create_work.toJSON())
     }
-
-    handleSubmit(event){
-      let momentTime = moment(this.state.time);
-      let momentDate = moment(this.state.date);
-      let renderedDateTime = moment({
-        year: momentDate.year(),
-        month: momentDate.month(),
-        day: momentDate.date(),
-        hour: momentTime.hours(),
-        minute: momentTime.minutes()
-      });
-      const newChore = {
-        date_time: renderedDateTime,
-      }
-      this.props.actions.addEvent(newChore)
-      this.setState({date: null, time: null});
-    }
-
     render() {
-      const actions = [
-        <FlatButton
-          label="Cancel"
-          primary={true}
-          onTouchTap={this.handleClose}
-        />,
-        <FlatButton
-          label="Submit"
-          primary={true}
-          type='submit'
-          onTouchTap={this.handleSubmit}
-        />,
-      ];
+      const { create_work, createWorkHandle } = this.props;
+      const create_work_obj = create_work.toJSON();
       const styles = {
         inputStyle: {
           color: 'white',
@@ -110,18 +74,16 @@ export class Header extends React.Component {
           fontSize: '5vw',
         },
       };
-      const header = (this.state.loggedIn) ?
+      const header = (!this.state.loggedIn) ?
           <div className="create_work" onClick={() => this.setState({modalFlag: !this.state.modalFlag})}>
             ＋
-          </div>
-        :
+          </div> :
           <div className="header_right_content">
             <img src="./images/twitter-logo.png"/>
             <div className="header_right_text">
               <a href="http://localhost:3000/auth/twitter">ログイン/新規登録</a>
             </div>
-          </div>
-        ;
+          </div> ;
 
         return (
           <div className="header">
@@ -138,8 +100,12 @@ export class Header extends React.Component {
                   予定を作る
                 </div>
                 <DatePicker
-                  onChange={this.handleDate}
-                  value={this.state.date}
+                  onChange={(event, date) => createWorkHandle('date', date)}
+                  defaultDate={create_work_obj.date}
+                  formatDate={(dt) => `${dt.getFullYear()}年${dt.getMonth() + 1}月${dt.getDate()}日`}
+                  DateTimeFormat={MomentFormat}
+                  locale='ja'
+                  defaultDate={this.state.date}
                   floatingLabelText="日にち"
                   hintText="日にち"
                   inputStyle={styles.inputStyle}
@@ -148,18 +114,9 @@ export class Header extends React.Component {
                   floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                   underlineStyle={styles.underlineStyle}
                 />
-                <TimePicker
-                  onChange={this.handleTime}
-                  value={this.state.time}
-                  floatingLabelText="時間"
-                  hintText="時間"
-                  inputStyle={styles.inputStyle}
-                  hintStyle={styles.hintStyle}
-                  floatingLabelStyle={styles.floatingLabelStyle}
-                  floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                  underlineStyle={styles.underlineStyle}
-                />
                 <TextField
+                  onChange={(event, title) => createWorkHandle('title', title)}
+                  value={create_work_obj.title}
                   hintText="作品名"
                   floatingLabelText="作品名"
                   inputStyle={styles.inputStyle}
@@ -169,6 +126,8 @@ export class Header extends React.Component {
                   underlineStyle={styles.underlineStyle}
                 /><br />
                 <TextField
+                  onChange={(event, description) => createWorkHandle('description', description)}
+                  value={create_work_obj.description}
                   hintText="説明"
                   multiLine={true}
                   rows={1}
@@ -181,6 +140,8 @@ export class Header extends React.Component {
                   underlineStyle={styles.underlineStyle}
                 /><br />
                 <TextField
+                  onChange={(event, eventName) => createWorkHandle('eventName', eventName)}
+                  value={create_work_obj.eventName}
                   hintText="場所 or イベント"
                   floatingLabelText="場所 or イベント"
                   inputStyle={styles.inputStyle}
@@ -194,14 +155,15 @@ export class Header extends React.Component {
                   fontSize: '7vw',
                   margin: '5px auto',
                 }}
-                onTouchTap={() => this.setState({modalFlag: !this.state.modalFlag, completeModalFlag: !this.state.completeModalFlag})}
+                onTouchTap={() => this.createWork()}
                 />
                 </div>
               </Modal.Body>
             </Modal>
             <Modal show={this.state.completeModalFlag} className="your_follow_modal" >
               <Modal.Body>
-                <span className="closeButtonFollow" onClick={() => this.setState({completeModalFlag: !this.state.completeModalFlag})}>×</span>
+              {/*}<span className="closeButtonFollow" onClick={() => this.setState({completeModalFlag: !this.state.completeModalFlag})}>×</span>*/}
+              <span className="closeButtonFollow" onClick={() => this.handleSubmit(create_work_obj)}>×</span>
                 <div className="complete_modal">
                   <span>予定の作成が<br/>完了しました！</span>
                 </div>
@@ -213,14 +175,24 @@ export class Header extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    const { works } = state;
+    const { create_work, user } = state;
     return {
-        works: works
+      create_work: create_work,
+      user: user
     };
 };
 
+const mapDispatchToProps = (dispatch) => {
+    return {
+      createWorkHandle: (key, value) =>  dispatch(createWorkHandle(key, value)),
+      createWorkAction: (userId, params) => dispatch(createWorkAction(userId, params))
+    };
+};
+
+
 const ContainerHeader = connect(
     mapStateToProps,
+    mapDispatchToProps,
 )(Header);
 
 export default ContainerHeader;
