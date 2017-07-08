@@ -30,6 +30,7 @@ export class Works extends React.Component {
         selected_follow_width = 1;
       }
       const myWorks = works.toJSON().map((work, key) => {
+        console.log(work);
             return (
                 <ContainerWork work={work} num={key} key={key} />
             )

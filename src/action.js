@@ -118,3 +118,46 @@ export function createWorkAction(userId, params) {
         .catch(() => dispatch(receiveErrorLoggedIn()));
   }
 };
+
+export function uploadFile(userId, file) {
+  return dispatch => {
+    dispatch(requestLoggedIn())
+    console.log('file');
+    console.log(file);
+    console.log(file.type);
+      return axios.post(`http://localhost:3000/users/${userId}/images`, file, {
+        headers: {
+          'Content-Type': file.type
+        },
+          withCredentials: true
+        })
+        .then(response => (
+          dispatch(receiveWork(response.data.works))
+      ))
+        .catch(() => dispatch(receiveErrorLoggedIn()));
+  }
+
+  // const failCB = (err: Error) => {
+  //   console.error(err);
+  //   dispatch({type: FETCH_FAIL, error: err})
+  // };
+  //
+  // const successCB:(response: IResponse) => Promise<void> = (response) => {
+  //   if(response.status === 200){ //2xx
+  //     return response.json<any>().then((json) => {
+  //       console.log(json);
+  //     });
+  //   }else{
+  //     dispatch({type: FETCH_FAIL, error: response.status})
+  //   }
+  // };
+
+  // //③
+  // const formData = new FormData();
+  // formData.append('myFile', file);
+  //
+  // //④
+  // return fetch('/api/upload', {method: 'POST', body: formData})
+  //   .then(successCB)
+  //   .catch(failCB);
+};

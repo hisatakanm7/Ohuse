@@ -12,7 +12,7 @@ import HeaderStyles from '../scss/Header.scss'
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import axios from "axios";
-import { createWorkHandle, createWorkAction } from '../action';
+import { createWorkHandle, createWorkAction, uploadFile } from '../action';
 import MomentFormat from './Moment.js';
 
 
@@ -26,6 +26,7 @@ export class Header extends React.Component {
         date: date,
       }
       this.handleSubmit = this.handleSubmit.bind(this);
+      this.handleChangeFile = this.handleChangeFile.bind(this);
     }
     componentWillMount() {
       injectTapEventPlugin();
@@ -38,6 +39,15 @@ export class Header extends React.Component {
       console.log(this.props.user.toJSON().info.id);
       console.log(this.props.create_work.toJSON());
       this.props.createWorkAction(this.props.user.toJSON().info.id, this.props.create_work.toJSON())
+    }
+    handleChangeFile(e) {
+      const target = e.target;
+      const data = new FormData();
+          data.append('url', target.files.item(0));
+      // const target = e.target;
+      // const file = target.files.item(0);
+      // this.props.uploadFile(this.props.user.toJSON().info.id, {file: file});
+      this.props.uploadFile(this.props.user.toJSON().info.id, data);
     }
     render() {
       const { create_work, createWorkHandle } = this.props;
@@ -79,7 +89,7 @@ export class Header extends React.Component {
             ＋
           </div> :
           <div className="header_right_content">
-            <img src="./images/twitter-logo.png"/>
+            <img src="https://s3-ap-northeast-1.amazonaws.com/ohuse.co/uploads/tmp/1498949515-15786-0001-6408/iQkvOwTa_normal.jpg"/>
             <div className="header_right_text">
               <a href="http://localhost:3000/auth/twitter">ログイン/新規登録</a>
             </div>
@@ -99,6 +109,7 @@ export class Header extends React.Component {
                 <div className="modal_follow_title">
                   予定を作る
                 </div>
+                <input type="file" onChange={(e) => this.handleChangeFile(e)}/>
                 <DatePicker
                   onChange={(event, date) => createWorkHandle('date', date)}
                   defaultDate={create_work_obj.date}
@@ -185,7 +196,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
       createWorkHandle: (key, value) =>  dispatch(createWorkHandle(key, value)),
-      createWorkAction: (userId, params) => dispatch(createWorkAction(userId, params))
+      createWorkAction: (userId, params) => dispatch(createWorkAction(userId, params)),
+      uploadFile: (userId, file) => dispatch(uploadFile(userId, file))
     };
 };
 
