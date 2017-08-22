@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 const I = require('immutable');
 
 import { ADD_LIST } from './action';
-import { MODAL_TOGGLE_CHANGE, RECEIVE_LOGGED_IN, REQUEST_LOGGED_IN, RECEIVE_ERROR_LOGGED_IN, CREATE_WORK_HANDLE, RECEIVE_WORK, RECEIVE_EVENTS, RECEIVE_IMAGE} from './action';
+import { MODAL_TOGGLE_CHANGE, RECEIVE_LOGGED_IN, REQUEST_LOGGED_IN, RECEIVE_ERROR_LOGGED_IN, CREATE_WORK_HANDLE, RECEIVE_WORK, RECEIVE_EVENTS, RECEIVE_IMAGE , RECEIVE_TAPPED_FOLLOW} from './action';
 
 //*****完成*****
 //-----完成（class）----
@@ -129,6 +129,8 @@ const user = (state = I.fromJS(user_data), action) => {
         if (user.notifications != undefined) tmp = tmp.set('notifications', I.List(create_list(user.notifications, 'Notification')));
         if (user.TappedFollowed != undefined) tmp = tmp.set('TappedFollowed', I.List(create_list(user.TappedFollowed, 'TappedFollow')));
         return tmp;
+      case RECEIVE_TAPPED_FOLLOW:
+        return state.set('TappedFollowed', I.List(state.TappedFollowed).unshift(new TappedFollow(action.response.body)).pop());
       default:
           return state;
     }

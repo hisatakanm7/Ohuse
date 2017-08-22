@@ -2,12 +2,14 @@ export const ADD_LIST = 'ADD_LIST';
 export const MODAL_TOGGLE_CHANGE = 'MODAL_TOGGLE_CHANGE';
 export const RECEIVE_LOGGED_IN = 'RECEIVE_LOGGED_IN';
 export const RECEIVE_ERROR_LOGGED_IN = 'RECEIVE_ERROR_LOGGED_IN';
-export const REQUEST_LOGGED_IN = 'REQUEST_LOGGED_IN'
 export const CREATE_WORK_HANDLE = 'CREATE_WORK_HANDLE'
 export const RECEIVE_WORK = 'RECEIVE_WORK'
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const RECEIVE_IMAGE = 'RECEIVE_IMAGE'
+
+export const REQUEST_LOGGED_IN = 'REQUEST_LOGGED_IN'
 export const RECEIVE_EVENTS = 'RECEIVE_EVENTS'
+export const RECEIVE_TAPPED_FOLLOW = 'RECEIVE_TAPPED_FOLLOW'
 
 import axios from "axios";
 
@@ -27,20 +29,6 @@ export const modalToggleChange = (id, flag) => {
     }
 };
 
-export const requestLoggedIn = () => {
-  return {
-    type: REQUEST_LOGGED_IN,
-    loading: true
-  }
-}
-
-export const receiveLoggedIn = (response) => {
-  return {
-      type: 'RECEIVE_LOGGED_IN',
-      response
-  }
-};
-
 export const receiveErrorLoggedIn = (response) => {
   console.log(response);
   console.log('response');
@@ -56,15 +44,6 @@ export const createWorkHandle = (key, value) => {
         key: key,
         value: value
     }
-};
-
-export const receiveEvents = (response) => {
-  console.log(response);
-  console.log('response');
-  return {
-      type: 'RECEIVE_EVENTS',
-      response
-  }
 };
 
 export const receiveWork = (response) => {
@@ -92,6 +71,43 @@ function receiveImage(response) {
   }
 }
 
+
+export const requestLoggedIn = () => {
+  return {
+    type: REQUEST_LOGGED_IN,
+    loading: true
+  }
+}
+
+//*****完成*****
+//-----完成（action）----
+
+export const receiveLoggedIn = (response) => {
+  return {
+      type: 'RECEIVE_LOGGED_IN',
+      response
+  }
+};
+
+export const receiveEvents = (response) => {
+  console.log(response);
+  console.log('response');
+  return {
+      type: 'RECEIVE_EVENTS',
+      response
+  }
+};
+
+export const receiveTappedFollow = (response) => {
+  return {
+      type: 'RECEIVE_TAPPED_FOLLOW',
+      response
+  }
+};
+//-----完成終了（action）----
+
+//-----完成（function）----
+
 // //actionとしてのfunctionは実行後に必ずtypeをreturnしないといけない
 export function comfirmLoggedIn() {
   return dispatch => {
@@ -102,10 +118,28 @@ export function comfirmLoggedIn() {
         .then(response => (
           dispatch(receiveLoggedIn(response.data)),
           dispatch(receiveEvents(response.data))
-      ))
+        ))
         .catch(() => dispatch(receiveErrorLoggedIn()));
   }
 };
+
+export function updateTappedFollow(userId) {
+  return dispatch => {
+    dispatch(requestLoggedIn())
+    return axios.put(`http://localhost:3000/my/update`, {user_id: userId}, {
+        withCredentials: true
+      })
+      .then(response => (
+        dispatch(receiveTappedFollow(response.data))
+      ))
+      .catch(() => dispatch(receiveErrorLoggedIn()));
+  }
+};
+
+//-----完成終了（function）----
+//*****完成終了*****
+
+
 
 // //actionとしてのfunctionは実行後に必ずtypeをreturnしないといけない
 export function createWorkAction(userId, params) {
@@ -133,12 +167,12 @@ export function createWorkAction(userId, params) {
   //   }
   //   console.log(params);
   //
-  //   return axios.post(`http://localhost:3000/users/${userId}/events`, params, {
-  //       withCredentials: true
-  //     })
-  //     .then(response => (
-  //       dispatch(receiveWork(response.data.works))
-  //   ))
+    // return axios.post(`http://localhost:3000/users/${userId}/events`, params, {
+    //     withCredentials: true
+    //   })
+    //   .then(response => (
+    //     dispatch(receiveWork(response.data.works))
+    // ))
   //     .catch(() => dispatch(receiveErrorLoggedIn()));
   //     // return axios.post(`http://localhost:3000/users/${userId}/works`, params, {
   //     //     withCredentials: true
