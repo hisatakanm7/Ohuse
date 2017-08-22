@@ -118,15 +118,16 @@ function create_list_append(arr, child, className) {
 const user = (state = I.fromJS(user_data), action) => {
     switch (action.type) {
       case RECEIVE_LOGGED_IN:
-        const res = action.response.body
-        let tmp = state.set('info', new UserInfo(res.user.info));
-        tmp = tmp.set('events', I.List(create_list(res.user.events, 'Event')));
-        tmp = tmp.set('ofuses', I.List(create_list(res.user.ofuses, 'Ofuse')));
-        tmp = tmp.set('billed_ofuses', I.List(create_list(res.user.billed_ofuses, 'Ofuse')));
-        tmp = tmp.set('followed', I.List(create_list(res.user.followed, 'Follow')));
-        tmp = tmp.set('follower', I.List(create_list(res.user.follower, 'Follow')));
-        tmp = tmp.set('notifications', I.List(create_list(res.user.notifications, 'Notification')));
-        tmp = tmp.set('TappedFollowed', I.List(create_list(res.user.TappedFollowed, 'TappedFollow')));
+        const user = action.response.body.user
+        let tmp = state;
+        if (user.info != undefined) tmp = tmp.set('info', new UserInfo(user.info));
+        if (user.events != undefined) tmp = tmp.set('events', I.List(create_list(user.events, 'Event')));
+        if (user.ofuses != undefined) tmp = tmp.set('ofuses', I.List(create_list(user.ofuses, 'Ofuse')));
+        if (user.billed_ofuses != undefined) tmp = tmp.set('billed_ofuses', I.List(create_list(user.billed_ofuses, 'Ofuse')));
+        if (user.followed != undefined) tmp = tmp.set('followed', I.List(create_list(user.followed, 'Follow')));
+        if (user.follower != undefined) tmp = tmp.set('follower', I.List(create_list(user.follower, 'Follow')));
+        if (user.notifications != undefined) tmp = tmp.set('notifications', I.List(create_list(user.notifications, 'Notification')));
+        if (user.TappedFollowed != undefined) tmp = tmp.set('TappedFollowed', I.List(create_list(user.TappedFollowed, 'TappedFollow')));
         return tmp;
       default:
           return state;
