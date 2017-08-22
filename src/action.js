@@ -4,9 +4,10 @@ export const RECEIVE_LOGGED_IN = 'RECEIVE_LOGGED_IN';
 export const RECEIVE_ERROR_LOGGED_IN = 'RECEIVE_ERROR_LOGGED_IN';
 export const REQUEST_LOGGED_IN = 'REQUEST_LOGGED_IN'
 export const CREATE_WORK_HANDLE = 'CREATE_WORK_HANDLE'
-export const RECEIVE_MY_WORKS = 'RECEIVE_MY_WORKS'
 export const RECEIVE_WORK = 'RECEIVE_WORK'
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
+export const RECEIVE_IMAGE = 'RECEIVE_IMAGE'
+export const RECEIVE_EVENTS = 'RECEIVE_EVENTS'
 
 import axios from "axios";
 
@@ -34,7 +35,6 @@ export const requestLoggedIn = () => {
 }
 
 export const receiveLoggedIn = (response) => {
-  console.log(response);
   return {
       type: 'RECEIVE_LOGGED_IN',
       response
@@ -43,6 +43,7 @@ export const receiveLoggedIn = (response) => {
 
 export const receiveErrorLoggedIn = (response) => {
   console.log(response);
+  console.log('response');
   return {
       type: 'RECEIVE_ERROR_LOGGED_IN',
       loading: false
@@ -57,10 +58,11 @@ export const createWorkHandle = (key, value) => {
     }
 };
 
-export const receiveMyWorks = (response) => {
+export const receiveEvents = (response) => {
   console.log(response);
+  console.log('response');
   return {
-      type: 'RECEIVE_MY_WORKS',
+      type: 'RECEIVE_EVENTS',
       response
   }
 };
@@ -82,17 +84,24 @@ function receivePosts(subreddit, json) {
   }
 }
 
+function receiveImage(response) {
+  console.log(response);
+  return {
+    type: RECEIVE_IMAGE,
+    response
+  }
+}
+
 // //actionとしてのfunctionは実行後に必ずtypeをreturnしないといけない
 export function comfirmLoggedIn() {
-  console.log('comfirmLoggedIn');
   return dispatch => {
     dispatch(requestLoggedIn())
-      return axios.get('http://localhost:3000/logged_in', {
-          withCredentials: true
+      return axios.get('http://localhost:3000/logged_in.json', {
+          // withCredentials: true
         })
         .then(response => (
-          dispatch(receiveLoggedIn(response.data.user)),
-          dispatch(receiveMyWorks(response.data.works))
+          dispatch(receiveLoggedIn(response.data)),
+          dispatch(receiveEvents(response.data))
       ))
         .catch(() => dispatch(receiveErrorLoggedIn()));
   }
@@ -100,23 +109,45 @@ export function comfirmLoggedIn() {
 
 // //actionとしてのfunctionは実行後に必ずtypeをreturnしないといけない
 export function createWorkAction(userId, params) {
-  console.log('userId');
-  console.log(userId);
-  console.log('params');
-  console.log(params);
-
   return dispatch => {
     dispatch(requestLoggedIn())
-    console.log('params');
-    console.log(params);
-      return axios.post(`http://localhost:3000/users/${userId}/works`, params, {
+      return axios.get('http://localhost:3000/users', {
+        params: {
+          logged_in: true
+        },
           withCredentials: true
         })
         .then(response => (
-          dispatch(receiveWork(response.data.works))
+          dispatch(receiveLoggedIn(response.data.user)),
+          dispatch(receiveEvents(response.data.events))
       ))
         .catch(() => dispatch(receiveErrorLoggedIn()));
   }
+
+
+  // return dispatch => {
+  //   dispatch(requestLoggedIn())
+  //   console.log('params');
+  //   params = {
+  //     logged_in: true,
+  //   }
+  //   console.log(params);
+  //
+  //   return axios.post(`http://localhost:3000/users/${userId}/events`, params, {
+  //       withCredentials: true
+  //     })
+  //     .then(response => (
+  //       dispatch(receiveWork(response.data.works))
+  //   ))
+  //     .catch(() => dispatch(receiveErrorLoggedIn()));
+  //     // return axios.post(`http://localhost:3000/users/${userId}/works`, params, {
+  //     //     withCredentials: true
+  //     //   })
+  //     //   .then(response => (
+  //     //     dispatch(receiveWork(response.data.works))
+  //     // ))
+  //     //   .catch(() => dispatch(receiveErrorLoggedIn()));
+  // }
 };
 
 export function uploadFile(userId, file) {
@@ -132,32 +163,29 @@ export function uploadFile(userId, file) {
           withCredentials: true
         })
         .then(response => (
+          console.log(response.data.image),
+          dispatch(createWorkHandle('image', response.data.image))
+      ))
+        .catch(() => dispatch(receiveErrorLoggedIn()));
+  }
+};
+
+export function followUser(userId, other_user_id) {
+  console.log('userId');
+  console.log(userId);
+  console.log('other_user_id');
+  console.log(other_user_id);
+
+  return dispatch => {
+    dispatch(requestLoggedIn())
+    console.log('params');
+
+    return axios.post(`http://localhost:3000/users/${userId}/follow`, other_user_id, {
+        withCredentials: true
+      })
+        .then(response => (
           dispatch(receiveWork(response.data.works))
       ))
         .catch(() => dispatch(receiveErrorLoggedIn()));
   }
-
-  // const failCB = (err: Error) => {
-  //   console.error(err);
-  //   dispatch({type: FETCH_FAIL, error: err})
-  // };
-  //
-  // const successCB:(response: IResponse) => Promise<void> = (response) => {
-  //   if(response.status === 200){ //2xx
-  //     return response.json<any>().then((json) => {
-  //       console.log(json);
-  //     });
-  //   }else{
-  //     dispatch({type: FETCH_FAIL, error: response.status})
-  //   }
-  // };
-
-  // //③
-  // const formData = new FormData();
-  // formData.append('myFile', file);
-  //
-  // //④
-  // return fetch('/api/upload', {method: 'POST', body: formData})
-  //   .then(successCB)
-  //   .catch(failCB);
 };

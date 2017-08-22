@@ -2,7 +2,147 @@ import { combineReducers } from 'redux';
 const I = require('immutable');
 
 import { ADD_LIST } from './action';
-import { MODAL_TOGGLE_CHANGE, RECEIVE_LOGGED_IN, REQUEST_LOGGED_IN, RECEIVE_ERROR_LOGGED_IN, CREATE_WORK_HANDLE, RECEIVE_WORK, RECEIVE_MY_WORKS} from './action';
+import { MODAL_TOGGLE_CHANGE, RECEIVE_LOGGED_IN, REQUEST_LOGGED_IN, RECEIVE_ERROR_LOGGED_IN, CREATE_WORK_HANDLE, RECEIVE_WORK, RECEIVE_EVENTS, RECEIVE_IMAGE} from './action';
+
+//*****完成*****
+//-----完成（class）----
+
+const user_info_object = {
+  id: '',
+  name: '',
+  screen_name: '',
+  description: '',
+  status: '',
+  image_url: '',
+  joined: '',
+};
+
+const user_info = I.Record(user_info_object);
+
+class UserInfo extends user_info {}
+
+const event_object = {
+  id: '',
+  title: '',
+  release: '',
+  image_url: '',
+  place: '',
+  series: '',
+  user: '',
+};
+
+const event = I.Record(event_object);
+
+class Event extends event {}
+
+const ofuse_object = {
+  id: '',
+  user_id: '',
+  billed_user_id: '',
+  comment: '',
+  value: '',
+  created_at: '',
+};
+
+const ofuse = I.Record(ofuse_object);
+
+class Ofuse extends ofuse {}
+
+const follow_object = {
+  id: '',
+  image_url: '',
+  name: '',
+};
+
+const follow = I.Record(follow_object);
+
+class Follow extends follow {}
+
+
+const notification_object = {
+  user_id: '',
+  url: '',
+  status: '',
+  text: '',
+  type: '',
+};
+
+const notification = I.Record(notification_object);
+
+class Notification extends notification {}
+
+const tapped_follow_object = {
+  id: '',
+  image_url: '',
+};
+
+const tapped_follow = I.Record(tapped_follow_object);
+
+class TappedFollow extends tapped_follow {}
+
+//-----完成終了（class）----
+
+//-----完成（data）----
+
+//User
+const user_data = {
+  info: user_info_object,
+  events: [],
+  ofuses: [],
+  billed_ofuses: [],
+  followed: [],
+  follower: [],
+  notifications: [],
+  TappedFollowed: [],
+}
+
+const events_data = []
+
+//-----完成終了（data）----
+
+//-----完成（function）----
+
+function create_list (datum, className) {
+  let arr = [];
+  datum.map(child => create_list_append(arr, child, className));
+  return arr;
+};
+
+function create_list_append(arr, child, className) {
+  arr.push(eval(`new ${className}(${JSON.stringify(child)})`));
+};
+
+//-----完成終了（function）----
+
+//-----完成（state）----
+const user = (state = I.fromJS(user_data), action) => {
+    switch (action.type) {
+      case RECEIVE_LOGGED_IN:
+        const res = action.response.body
+        let tmp = state.set('info', new UserInfo(res.user.info));
+        tmp = tmp.set('events', I.List(create_list(res.user.events, 'Event')));
+        tmp = tmp.set('ofuses', I.List(create_list(res.user.ofuses, 'Ofuse')));
+        tmp = tmp.set('billed_ofuses', I.List(create_list(res.user.billed_ofuses, 'Ofuse')));
+        tmp = tmp.set('followed', I.List(create_list(res.user.followed, 'Follow')));
+        tmp = tmp.set('follower', I.List(create_list(res.user.follower, 'Follow')));
+        tmp = tmp.set('notifications', I.List(create_list(res.user.notifications, 'Notification')));
+        tmp = tmp.set('TappedFollowed', I.List(create_list(res.user.TappedFollowed, 'TappedFollow')));
+        return tmp;
+      default:
+          return state;
+    }
+};
+
+const events = (state = I.fromJS(events_data), action) => {
+  switch (action.type) {
+      case RECEIVE_EVENTS:
+        return I.List(create_list(action.response.body.events, 'Event'));
+      default:
+        return state;
+    }
+};
+//-----完成終了（state）----
+//*****完成終了*****
 
 const work_object = {
   id: 0,
@@ -21,16 +161,8 @@ const work = I.Record(work_object);
 
 class Work extends work {}
 
-const user_info_object = {
-  id: '',
-  name: '',
-  description: '',
-  image_url: '',
-};
 
-const user_info = I.Record(user_info_object);
 
-class UserInfo extends user_info {}
 const dateYesterday = new Date();
 // dateYesterday.setDate(dateYesterday.getDate() - 1);
 
@@ -44,46 +176,48 @@ const create_work_data = {
   released: true,
 }
 
-//User
-const user_data = {
-  info:{
-    id: 10,
-    name: 'ヒサタカ@お布施早くやりたい',
-    TwID: 'hisataka',
-    description: 'ofuse作りました',
-    image: '',
-  },
-  works: [],
-  follows: [{
-    id: 1,
-    name: '俺がファン１号',
-    TwID: 'orenofan1',
-    description: 'ファンです１',
-    image: '',
-    selected: true,
-  },{
-    id: 2,
-    name: '俺がファン２号',
-    TwID: 'orenofan2',
-    description: 'ファンです２',
-    image: '',
-    selected: true,
-  }],
-  followers: [{
-    id: 1,
-    name: '俺のファン１号',
-    TwID: 'orenofan1',
-    description: 'ファン１号です',
-    image: '',
-  },{
-    id: 2,
-    name: '俺のファン２号',
-    TwID: 'orenofan2',
-    description: 'ファン2号です',
-    image: '',
-  }]
-}
 
+
+
+// const user_data = {
+//   info:{
+//     id: 10,
+//     name: 'ヒサタカ@お布施早くやりたい',
+//     TwID: 'hisataka',
+//     description: 'ofuse作りました',
+//     image: '',
+//   },
+//   works: [],
+//   follows: [{
+//     id: 1,
+//     name: '俺がファン１号',
+//     TwID: 'orenofan1',
+//     description: 'ファンです１',
+//     image: '',
+//     selected: true,
+//   },{
+//     id: 2,
+//     name: '俺がファン２号',
+//     TwID: 'orenofan2',
+//     description: 'ファンです２',
+//     image: '',
+//     selected: true,
+//   }],
+//   followers: [{
+//     id: 1,
+//     name: '俺のファン１号',
+//     TwID: 'orenofan1',
+//     description: 'ファン１号です',
+//     image: '',
+//   },{
+//     id: 2,
+//     name: '俺のファン２号',
+//     TwID: 'orenofan2',
+//     description: 'ファン2号です',
+//     image: '',
+//   }]
+// }
+//
 //Works
 const works_data = [{
     id: 0,
@@ -144,7 +278,7 @@ function append_works_list (arr, child) {
     const newWork = new Work(child);
 
     arr.push(newWork);
-    console.log('before push')
+    console.log('before push');
 
 };
 
@@ -176,28 +310,11 @@ const page = (state = I.fromJS(page_data), action) => {
     }
 };
 
-const user = (state = I.fromJS(user_data), action) => {
-    switch (action.type) {
-      case RECEIVE_LOGGED_IN:
-        return state.set('info', new UserInfo(action.response));
-      case RECEIVE_MY_WORKS:
-        let arr = [];
-        action.response.map(child => append_works_list(arr, child));
-        console.log(arr);
-        return state.set('works', I.List(arr));
-      case RECEIVE_WORK:
-        return state.update('works', list => list.push(action.response));
-      default:
-          return state;
-    }
-};
-
 const works = (state = I.fromJS(works_data), action) => {
   switch (action.type) {
       case MODAL_TOGGLE_CHANGE:
         const num = action.id;
         return state.setIn([num, 'modalVisible'], !state.getIn([num, 'modalVisible']))
-      case RECEIVE_MY_WORKS:
 
       default:
           return state;
@@ -208,16 +325,43 @@ const create_work = (state = I.fromJS(create_work_data), action) => {
   switch (action.type) {
     case CREATE_WORK_HANDLE:
       return state.set(action.key, action.value);
-      default:
-          return state;
+    default:
+        return state;
     }
 };
 
+// const user = (state = I.fromJS(user_data), action) => {
+//     switch (action.type) {
+//       case RECEIVE_LOGGED_IN:
+//         const res = action.response.body
+//         let tmp = state.set('info', new UserInfo(res.user.info));
+//         tmp = tmp.set('events', I.List(create_list(res.user.events, 'Event')));
+//         tmp = tmp.set('ofuses', I.List(create_list(res.user.ofuses, 'Ofuse')));
+//         tmp = tmp.set('billed_ofuses', I.List(create_list(res.user.billed_ofuses, 'Ofuse')));
+//         tmp = tmp.set('followed', I.List(create_list(res.user.followed, 'Follow')));
+//         tmp = tmp.set('follower', I.List(create_list(res.user.follower, 'Follow')));
+//         tmp = tmp.set('notifications', I.List(create_list(res.user.notifications, 'Notification')));
+//         tmp = tmp.set('TappedFollowed', I.List(create_list(res.user.TappedFollowed, 'TappedFollow')));
+//         return tmp;
+//         // case RECEIVE_LOGGED_IN:
+//         //   return state.set('info', new UserInfo(action.response));
+//       // case RECEIVE_MY_WORKS:
+//       //   let arr = [];
+//       //   action.response.map(child => append_works_list(arr, child));
+//       //   console.log(arr);
+//       //   return state.set('works', I.List(arr));
+//       // case RECEIVE_WORK:
+//       //   return state.update('works', list => list.push(action.response));
+//       default:
+//           return state;
+//     }
+// };
 
 
 const reducer = combineReducers({
     page,
     user,
+    events,
     works,
     loading,
     create_work //1つ1つのreducerを書く。増えたらここに追加する。

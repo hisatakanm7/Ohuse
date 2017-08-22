@@ -95,6 +95,12 @@ export class Header extends React.Component {
             </div>
           </div> ;
 
+          const image = (!create_work_obj.image) ?
+          <div>
+          </div> :
+          <img src={create_work_obj.image}/>
+          ;
+
         return (
           <div className="header">
             <div className="icon_text">
@@ -110,6 +116,7 @@ export class Header extends React.Component {
                   予定を作る
                 </div>
                 <input type="file" onChange={(e) => this.handleChangeFile(e)}/>
+                {image}
                 <DatePicker
                   onChange={(event, date) => createWorkHandle('date', date)}
                   defaultDate={create_work_obj.date}

@@ -24,7 +24,7 @@ import ContainerRoot from './Root.js';
 import Work from './components/Work.js';
 import styles from './scss/index.scss'
 import axios from "axios";
-import { comfirmLoggedIn, receiveLoggedIn } from './action';
+import { comfirmLoggedIn, receiveLoggedIn, followUser } from './action';
 
 const store = configureStore();
 
@@ -50,7 +50,7 @@ class App extends React.Component {
           <Router>
             <MuiThemeProvider>
               <div>
-              <button onClick={() => comfirmLoggedIn()}>
+              <button onClick={() => this.props.followUser(userId, {other_user_id: 2})}>
                 onClick
                 </button>
                 <button onClick={() => this.handle(userId)}>
@@ -83,7 +83,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
       addList: (e) =>  dispatch(addList(e)),
       receiveLoggedIn: (e) =>  dispatch(receiveLoggedIn(e)),
-      comfirmLoggedIn: (e) =>  dispatch(comfirmLoggedIn(e))
+      comfirmLoggedIn: (e) =>  dispatch(comfirmLoggedIn(e)),
+      followUser: (usrId, other_user_id) => dispatch(followUser(usrId, other_user_id)),
     };
 };
 
