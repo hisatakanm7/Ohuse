@@ -2,7 +2,19 @@ import { combineReducers } from 'redux';
 const I = require('immutable');
 
 import { ADD_LIST } from './action';
-import { MODAL_TOGGLE_CHANGE, RECEIVE_LOGGED_IN, REQUEST_LOGGED_IN, RECEIVE_ERROR_LOGGED_IN, CREATE_WORK_HANDLE, RECEIVE_WORK, RECEIVE_EVENTS, RECEIVE_IMAGE , RECEIVE_TAPPED_FOLLOW} from './action';
+import {
+  MODAL_TOGGLE_CHANGE,
+  RECEIVE_LOGGED_IN,
+  REQUEST_LOGGED_IN,
+  RECEIVE_ERROR_LOGGED_IN,
+  CREATE_WORK_HANDLE,
+  RECEIVE_WORK,
+  RECEIVE_EVENTS,
+  RECEIVE_IMAGE ,
+  RECEIVE_TAPPED_FOLLOW,
+  THROW_ERROR,
+  REFLECT_STATUS
+} from './action';
 
 //*****完成*****
 //-----完成（class）----
@@ -80,6 +92,26 @@ const tapped_follow = I.Record(tapped_follow_object);
 
 class TappedFollow extends tapped_follow {}
 
+const error_object = {
+  type: '',
+  attributes: '',
+};
+
+const error = I.Record(error_object);
+
+class Error extends error {}
+
+const status_object = {
+  logged_in: '',
+  first_log_in: '',
+}
+
+const status = I.Record(status_object);
+
+class Status extends status {}
+
+
+
 //-----完成終了（class）----
 
 //-----完成（data）----
@@ -97,6 +129,8 @@ const user_data = {
 }
 
 const events_data = []
+
+
 
 //-----完成終了（data）----
 
@@ -144,8 +178,40 @@ const events = (state = I.fromJS(events_data), action) => {
         return state;
     }
 };
+
+const errors = (state = I.fromJS(error_object), action) => {
+  switch (action.type) {
+      case THROW_ERROR:
+        return I.fromJS(new Error(action.data));
+      default:
+        return state;
+    }
+};
+
+const statuses = (state = I.fromJS(status_object), action) => {
+  switch (action.type) {
+      case REFLECT_STATUS:
+        return I.fromJS(new Status(action.response.status));
+      default:
+        return state;
+    }
+};
 //-----完成終了（state）----
 //*****完成終了*****
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const work_object = {
   id: 0,
@@ -365,6 +431,8 @@ const reducer = combineReducers({
     page,
     user,
     events,
+    errors,
+    statuses,
     works,
     loading,
     create_work //1つ1つのreducerを書く。増えたらここに追加する。

@@ -24,6 +24,7 @@ import ContainerRoot from './Root.js';
 import Work from './components/Work.js';
 import styles from './scss/index.scss'
 import axios from "axios";
+import ContainerFooter from './components/Footer.js';
 import { comfirmLoggedIn, receiveLoggedIn, followUser } from './action';
 
 const store = configureStore();
@@ -33,16 +34,6 @@ class App extends React.Component {
     this.props.comfirmLoggedIn();
   }
 
-  handle(id){
-    // let url =
-    axios.post(`http://localhost:3000/users/${id}/works`, {
-        withCredentials: true
-      })
-      .then(response => console.log(response))
-      .catch(response => console.log(response));
-  }
-
-
     render() {
       const { addList, receiveLoggedIn, comfirmLoggedIn, user } = this.props;
       const userId = user.toJSON().info.id;
@@ -50,20 +41,10 @@ class App extends React.Component {
           <Router>
             <MuiThemeProvider>
               <div>
-              <button onClick={() => this.props.followUser(userId, {other_user_id: 2})}>
-                onClick
-                </button>
-                <button onClick={() => this.handle(userId)}>
-                  user
-                  </button>
                 <ContainerHeader />
                 <Route exact path="/" component={ContainerTimeLine}/>
                 <Route path="/work" component={ContainerMyPage}/>
-                <div id="footer">
-                  <Link to="/work">home</Link>
-                  <Link to="/">user</Link>
-                  <Link to="/">bars</Link>
-                </div>
+                <ContainerFooter />
               </div>
             </MuiThemeProvider>
           </Router>

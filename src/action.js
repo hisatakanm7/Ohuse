@@ -10,8 +10,88 @@ export const RECEIVE_IMAGE = 'RECEIVE_IMAGE'
 export const REQUEST_LOGGED_IN = 'REQUEST_LOGGED_IN'
 export const RECEIVE_EVENTS = 'RECEIVE_EVENTS'
 export const RECEIVE_TAPPED_FOLLOW = 'RECEIVE_TAPPED_FOLLOW'
+export const THROW_ERROR = 'THROW_ERROR'
+export const REFLECT_STATUS = 'REFLECT_STATUS'
 
 import axios from "axios";
+
+//*****完成*****
+//-----完成（action）----
+
+export const receiveLoggedIn = (response) => {
+  return {
+      type: 'RECEIVE_LOGGED_IN',
+      response
+  }
+};
+
+export const receiveEvents = (response) => {
+  return {
+      type: 'RECEIVE_EVENTS',
+      response
+  }
+};
+
+export const receiveTappedFollow = (response) => {
+  return {
+      type: 'RECEIVE_TAPPED_FOLLOW',
+      response
+  }
+};
+
+export const throwError = (response) => {
+  return {
+      type: 'THROW_ERROR',
+      response
+  }
+};
+
+export const reflectStatus = (response) => {
+  return {
+      type: 'REFLECT_STATUS',
+      response
+  }
+};
+//-----完成終了（action）----
+
+//-----完成（function）----
+
+// //actionとしてのfunctionは実行後に必ずtypeをreturnしないといけない
+export function comfirmLoggedIn() {
+  return dispatch => {
+    dispatch(requestLoggedIn())
+      return axios.get('http://localhost:3000/logged_in.json', {
+          // withCredentials: true
+        })
+        .then(response => (
+          dispatch(receiveLoggedIn(response.data)),
+          dispatch(receiveEvents(response.data))
+        ))
+        .catch(() => dispatch(receiveErrorLoggedIn()));
+  }
+};
+
+export function updateTappedFollow(userId) {
+  return dispatch => {
+    dispatch(requestLoggedIn())
+    return axios.put(`http://localhost:3000/my/update`, {user_id: userId}, {
+        withCredentials: true
+      })
+      .then(response => (
+        dispatch(receiveTappedFollow(response.data))
+      ))
+      .catch(() => dispatch(throwError()));
+  }
+};
+
+//-----完成終了（function）----
+//*****完成終了*****
+
+
+
+
+
+
 
 
 export const addList = (data) => {
@@ -30,8 +110,6 @@ export const modalToggleChange = (id, flag) => {
 };
 
 export const receiveErrorLoggedIn = (response) => {
-  console.log(response);
-  console.log('response');
   return {
       type: 'RECEIVE_ERROR_LOGGED_IN',
       loading: false
@@ -79,65 +157,6 @@ export const requestLoggedIn = () => {
   }
 }
 
-//*****完成*****
-//-----完成（action）----
-
-export const receiveLoggedIn = (response) => {
-  return {
-      type: 'RECEIVE_LOGGED_IN',
-      response
-  }
-};
-
-export const receiveEvents = (response) => {
-  console.log(response);
-  console.log('response');
-  return {
-      type: 'RECEIVE_EVENTS',
-      response
-  }
-};
-
-export const receiveTappedFollow = (response) => {
-  return {
-      type: 'RECEIVE_TAPPED_FOLLOW',
-      response
-  }
-};
-//-----完成終了（action）----
-
-//-----完成（function）----
-
-// //actionとしてのfunctionは実行後に必ずtypeをreturnしないといけない
-export function comfirmLoggedIn() {
-  return dispatch => {
-    dispatch(requestLoggedIn())
-      return axios.get('http://localhost:3000/logged_in.json', {
-          // withCredentials: true
-        })
-        .then(response => (
-          dispatch(receiveLoggedIn(response.data)),
-          dispatch(receiveEvents(response.data))
-        ))
-        .catch(() => dispatch(receiveErrorLoggedIn()));
-  }
-};
-
-export function updateTappedFollow(userId) {
-  return dispatch => {
-    dispatch(requestLoggedIn())
-    return axios.put(`http://localhost:3000/my/update`, {user_id: userId}, {
-        withCredentials: true
-      })
-      .then(response => (
-        dispatch(receiveTappedFollow(response.data))
-      ))
-      .catch(() => dispatch(receiveErrorLoggedIn()));
-  }
-};
-
-//-----完成終了（function）----
-//*****完成終了*****
 
 
 
