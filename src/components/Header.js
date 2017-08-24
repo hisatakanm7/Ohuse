@@ -40,13 +40,13 @@ export class Header extends React.Component {
       console.log(this.props.create_work.toJSON());
       this.props.createWorkAction(this.props.user.toJSON().info.id, this.props.create_work.toJSON())
     }
+    changeModalFlag() {
+      this.setState({modalFlag: !this.state.modalFlag});
+    }
     handleChangeFile(e) {
       const target = e.target;
       const data = new FormData();
           data.append('url', target.files.item(0));
-      // const target = e.target;
-      // const file = target.files.item(0);
-      // this.props.uploadFile(this.props.user.toJSON().info.id, {file: file});
       this.props.uploadFile(this.props.user.toJSON().info.id, data);
     }
     render() {
@@ -84,30 +84,16 @@ export class Header extends React.Component {
           fontSize: '5vw',
         },
       };
-      const header = (!this.state.loggedIn) ?
-          <div className="create_work" onClick={() => this.setState({modalFlag: !this.state.modalFlag})}>
-            ＋
-          </div> :
-          <div className="header_right_content">
-            <img src="https://s3-ap-northeast-1.amazonaws.com/ohuse.co/uploads/tmp/1498949515-15786-0001-6408/iQkvOwTa_normal.jpg"/>
-            <div className="header_right_text">
-              <a href="http://localhost:3000/auth/twitter">ログイン/新規登録</a>
-            </div>
-          </div> ;
-
-          const image = (!create_work_obj.image) ?
-          <div>
-          </div> :
-          <img src={create_work_obj.image}/>
-          ;
+      const header = !this.state.loggedIn ? < LoggedInHeader displayModal={() => this.changeModalFlag()} /> : < NotLoggedInHeader />;
+      const image = (!create_work_obj.image)
+        ? <div></div>
+        : <img src={create_work_obj.image}/>;
 
         return (
           <div className="header">
-            <div className="icon_text">
-              ○fuse
-            </div>
+            <Icon />
             <div className="header_right">
-            {header}
+              {header}
             </div>
             <Modal show={this.state.modalFlag} className="your_follow_modal" >
               <Modal.Body>
@@ -192,6 +178,27 @@ export class Header extends React.Component {
     }
 }
 
+const Icon = () => (
+  <div className="icon_text">
+    ○fuse
+  </div>
+)
+
+const LoggedInHeader = (props) => (
+  <div className="create_work" onClick={() => props.displayModal()}>
+    ＋
+  </div>
+)
+
+const NotLoggedInHeader = () => (
+  <div className="header_right_content">
+    <img src="https://s3-ap-northeast-1.amazonaws.com/ohuse.co/uploads/tmp/1498949515-15786-0001-6408/iQkvOwTa_normal.jpg"/>
+    <div className="header_right_text">
+      <a href="http://localhost:3000/auth/twitter">ログイン/新規登録</a>
+    </div>
+  </div>
+)
+
 const mapStateToProps = (state) => {
     const { create_work, user } = state;
     return {
@@ -207,7 +214,6 @@ const mapDispatchToProps = (dispatch) => {
       uploadFile: (userId, file) => dispatch(uploadFile(userId, file))
     };
 };
-
 
 const ContainerHeader = connect(
     mapStateToProps,
