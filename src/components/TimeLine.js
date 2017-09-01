@@ -13,12 +13,6 @@ import worksStyles from '../scss/Works.scss';
 import { Modal, Grid, Row, Col } from 'react-bootstrap';
 
 export class TimeLine extends React.Component {
-    constructor() {
-      super();
-      this.state = {
-        modalFlag: false
-      };
-    }
     render() {
       const { works } = this.props;
       const myWorks = works.toJSON().map((work, key) => {
@@ -30,15 +24,6 @@ export class TimeLine extends React.Component {
             <div>
               <ContainerTappedFollows />
               <ContainerWorks />
-              <Modal show={this.state.modalFlag} className="your_follow_modal" >
-                <Modal.Body>
-                  <span className="closeButtonFollow" onClick={() => this.setState({modalFlag: !this.state.modalFlag})}>×</span>
-                  <div className="modal_follow_title">
-                    <span>あなたのフォロー一覧</span>
-                  </div>
-                  <ContainerFollows />
-                </Modal.Body>
-              </Modal>
             </div>
         )
     }
