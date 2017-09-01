@@ -12,6 +12,8 @@ export const RECEIVE_EVENTS = 'RECEIVE_EVENTS'
 export const RECEIVE_TAPPED_FOLLOW = 'RECEIVE_TAPPED_FOLLOW'
 export const THROW_ERROR = 'THROW_ERROR'
 export const REFLECT_STATUS = 'REFLECT_STATUS'
+export const DISPLAY_MODAL = 'DISPLAY_MODAL'
+export const HIDE_MODAL = 'HIDE_MODAL'
 
 import axios from "axios";
 
@@ -50,6 +52,20 @@ export const reflectStatus = (response) => {
   return {
       type: 'REFLECT_STATUS',
       response
+  }
+};
+
+export const displayModal = (component, options) => {
+  return {
+      type: 'DISPLAY_MODAL',
+      component: component,
+      options: (options) ? options : {},
+  }
+};
+
+export const  hideModal = () => {
+  return {
+      type: 'HIDE_MODAL',
   }
 };
 //-----完成終了（action）----

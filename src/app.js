@@ -25,6 +25,7 @@ import Work from './components/Work.js';
 import styles from './scss/index.scss'
 import axios from "axios";
 import ContainerFooter from './components/Footer.js';
+import ContainerModalRoot from './components/Modal.js'
 import { comfirmLoggedIn, receiveLoggedIn, followUser } from './action';
 
 const store = configureStore();
@@ -33,23 +34,23 @@ class App extends React.Component {
   componentWillMount() {
     this.props.comfirmLoggedIn();
   }
-
-    render() {
-      const { addList, receiveLoggedIn, comfirmLoggedIn, user } = this.props;
-      const userId = user.toJSON().info.id;
-        return (
-          <Router>
-            <MuiThemeProvider>
-              <div>
-                <ContainerHeader />
-                <Route exact path="/" component={ContainerTimeLine}/>
-                <Route path="/work" component={ContainerMyPage}/>
-                <ContainerFooter />
-              </div>
-            </MuiThemeProvider>
-          </Router>
-        )
-    }
+  render() {
+    const { addList, receiveLoggedIn, comfirmLoggedIn, user } = this.props;
+    const userId = user.toJSON().info.id;
+      return (
+        <Router>
+          <MuiThemeProvider>
+            <div>
+              <ContainerHeader />
+              <ContainerModalRoot />
+              <Route exact path="/" component={ContainerTimeLine}/>
+              <Route path="/work" component={ContainerMyPage}/>
+              <ContainerFooter />
+            </div>
+          </MuiThemeProvider>
+        </Router>
+      )
+  }
 }
 
 const mapStateToProps = (state) => {

@@ -7,6 +7,7 @@ import axios from "axios";
 import ContainerWork from './Work.js';
 import ContainerWorks from './Works.js';
 import ContainerFollows from './Follows.js';
+import ContainerTappedFollows from './TappedFollows.js';
 import workStyles from '../scss/Work.scss';
 import worksStyles from '../scss/Works.scss';
 import { Modal, Grid, Row, Col } from 'react-bootstrap';
@@ -27,39 +28,17 @@ export class TimeLine extends React.Component {
         });
         return (
             <div>
-                <div className="follow_img_group">
-                  <div className="follow_img_box">
-                    <img src="../images/photo1.png"/>
+              <ContainerTappedFollows />
+              <ContainerWorks />
+              <Modal show={this.state.modalFlag} className="your_follow_modal" >
+                <Modal.Body>
+                  <span className="closeButtonFollow" onClick={() => this.setState({modalFlag: !this.state.modalFlag})}>×</span>
+                  <div className="modal_follow_title">
+                    <span>あなたのフォロー一覧</span>
                   </div>
-                  <div className="follow_img_box">
-                    <img src="../images/photo2.png"/>
-                  </div>
-                  <div className="follow_img_box">
-                    <img src="../images/photo3.png"/>
-                  </div>
-                  <div className="follow_img_box">
-                    <img src="../images/photo4.png"/>
-                  </div>
-                  <div className="follow_img_box">
-                    <img src="../images/photo5.png"/>
-                  </div>
-                  <div className="follow_img_box">
-                    <img src="../images/photo6.png"/>
-                  </div>
-                  <div className="follow_img_box" onClick={() => this.setState({modalFlag: !this.state.modalFlag})}>
-                    <img src="../images/show_more.png"/>
-                  </div>
-                </div>
-                <ContainerWorks />
-                <Modal show={this.state.modalFlag} className="your_follow_modal" >
-                  <Modal.Body>
-                    <span className="closeButtonFollow" onClick={() => this.setState({modalFlag: !this.state.modalFlag})}>×</span>
-                    <div className="modal_follow_title">
-                      <span>あなたのフォロー一覧</span>
-                    </div>
-                    <ContainerFollows />
-                  </Modal.Body>
-                </Modal>
+                  <ContainerFollows />
+                </Modal.Body>
+              </Modal>
             </div>
         )
     }

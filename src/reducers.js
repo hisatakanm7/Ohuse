@@ -13,7 +13,9 @@ import {
   RECEIVE_IMAGE ,
   RECEIVE_TAPPED_FOLLOW,
   THROW_ERROR,
-  REFLECT_STATUS
+  REFLECT_STATUS,
+  DISPLAY_MODAL,
+  HIDE_MODAL
 } from './action';
 
 //*****完成*****
@@ -110,6 +112,25 @@ const status = I.Record(status_object);
 
 class Status extends status {}
 
+const modal_options_object = {
+  content: '',
+  title: '',
+};
+
+const modalOptions = I.Record(modal_options_object);
+
+class modalOption extends modalOptions {}
+
+const modal_object = {
+  active: false,
+  component: '',
+  options: modal_options_object,
+}
+
+const modalRoot = I.Record(modal_object);
+
+class Modal extends modalRoot {}
+
 
 
 //-----完成終了（class）----
@@ -192,6 +213,21 @@ const statuses = (state = I.fromJS(status_object), action) => {
   switch (action.type) {
       case REFLECT_STATUS:
         return I.fromJS(new Status(action.response.status));
+      default:
+        return state;
+    }
+};
+
+const modal = (state = I.fromJS(modal_object), action) => {
+  switch (action.type) {
+      case DISPLAY_MODAL:
+        return I.fromJS(new Modal({
+          active: true,
+          component: action.component,
+          options: new modalOption(action.options)
+        }));
+      case HIDE_MODAL:
+        return I.fromJS(modal_object);
       default:
         return state;
     }
@@ -435,6 +471,7 @@ const reducer = combineReducers({
     statuses,
     works,
     loading,
+    modal,
     create_work //1つ1つのreducerを書く。増えたらここに追加する。
 });
 
