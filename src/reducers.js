@@ -191,7 +191,7 @@ const user = (state = I.fromJS(user_data), action) => {
             state.get('followed').findIndex(function(item) { 
               return item.get("id") === action.id; 
             }), function(item) {
-              return item.set("tapping", true);
+              return item.set("tapping", !item.get("tapping"));
             }
           )
         );
