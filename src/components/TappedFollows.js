@@ -9,7 +9,7 @@ export class TappedFollows extends React.Component {
       const { user, displayModal } = this.props;
       const tappedFollows = user.toJSON().TappedFollowed.map((value, key) => {
         return (
-          <ContainerTappedFollow image_url={value.image_url} key={key} />
+          <ContainerTappedFollow id={ value.id } image_url={value.image_url} key={key} />
         )
       });
       return (

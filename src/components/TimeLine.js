@@ -14,12 +14,6 @@ import { Modal, Grid, Row, Col } from 'react-bootstrap';
 
 export class TimeLine extends React.Component {
     render() {
-      const { works } = this.props;
-      const myWorks = works.toJSON().map((work, key) => {
-            return (
-                <ContainerWork work={work} num={key} key={key} />
-            )
-        });
         return (
             <div>
               <ContainerTappedFollows />
@@ -30,9 +24,7 @@ export class TimeLine extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    const { works } = state;
     return {
-        works: works
     };
 };
 

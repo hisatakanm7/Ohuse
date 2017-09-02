@@ -9,7 +9,7 @@ export const RECEIVE_IMAGE = 'RECEIVE_IMAGE'
 
 export const REQUEST_LOGGED_IN = 'REQUEST_LOGGED_IN'
 export const RECEIVE_EVENTS = 'RECEIVE_EVENTS'
-export const RECEIVE_TAPPED_FOLLOW = 'RECEIVE_TAPPED_FOLLOW'
+export const TAPPING_FOLLOW = 'TAPPING_FOLLOW'
 export const THROW_ERROR = 'THROW_ERROR'
 export const REFLECT_STATUS = 'REFLECT_STATUS'
 export const DISPLAY_MODAL = 'DISPLAY_MODAL'
@@ -34,10 +34,10 @@ export const receiveEvents = (response) => {
   }
 };
 
-export const receiveTappedFollow = (response) => {
+export const tappingFollow = (id) => {
   return {
-      type: 'RECEIVE_TAPPED_FOLLOW',
-      response
+      type: TAPPING_FOLLOW,
+      id: id
   }
 };
 

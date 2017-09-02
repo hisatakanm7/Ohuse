@@ -11,7 +11,7 @@ import {
   RECEIVE_WORK,
   RECEIVE_EVENTS,
   RECEIVE_IMAGE ,
-  RECEIVE_TAPPED_FOLLOW,
+  TAPPING_FOLLOW,
   THROW_ERROR,
   REFLECT_STATUS,
   DISPLAY_MODAL,
@@ -66,6 +66,7 @@ const follow_object = {
   id: '',
   image_url: '',
   name: '',
+  tapping: false,
 };
 
 const follow = I.Record(follow_object);
@@ -184,8 +185,16 @@ const user = (state = I.fromJS(user_data), action) => {
         if (user.notifications != undefined) tmp = tmp.set('notifications', I.List(create_list(user.notifications, 'Notification')));
         if (user.TappedFollowed != undefined) tmp = tmp.set('TappedFollowed', I.List(create_list(user.TappedFollowed, 'TappedFollow')));
         return tmp;
-      case RECEIVE_TAPPED_FOLLOW:
-        return state.set('TappedFollowed', I.List(state.TappedFollowed).unshift(new TappedFollow(action.response.body)).pop());
+      case TAPPING_FOLLOW:
+        return state.set('followed',
+          state.get('followed').update(
+            state.get('followed').findIndex(function(item) { 
+              return item.get("id") === action.id; 
+            }), function(item) {
+              return item.set("tapping", true);
+            }
+          )
+        );
       default:
           return state;
     }
