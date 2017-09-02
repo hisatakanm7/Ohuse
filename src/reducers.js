@@ -188,10 +188,10 @@ const user = (state = I.fromJS(user_data), action) => {
       case TAPPING_FOLLOW:
         return state.set('followed',
           state.get('followed').update(
-            state.get('followed').findIndex(function(item) { 
-              return item.get("id") === action.id; 
-            }), function(item) {
-              return item.set("tapping", !item.get("tapping"));
+            state.get('followed').findIndex(function(followed) { 
+              return followed.get('id') === action.id; 
+            }), function(followed) {
+              return followed.set('tapping', !followed.get('tapping'));
             }
           )
         );
