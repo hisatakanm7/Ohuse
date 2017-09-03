@@ -36,7 +36,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    displayModal: () =>  dispatch(displayModal('ContainerBasicTemplate', {title: 'あなたのフォロー一覧', content: 'followed'})),
+    displayModal: () =>  dispatch(displayModal('ContainerCircleIconsBody', {title: 'あなたのフォロー一覧', content: 'followed'})),
   };
 };
 

@@ -4,25 +4,31 @@ import { CircleIcon } from './CircleIcon.js';
 
 export class CircleIconsBody extends React.Component {
     render() {
-        const { content, user } = this.props;
-        const datum = eval(`user.toJSON().${content}`);
+        const { user, modal } = this.props;
+        const datum = eval(`user.toJSON().${modal.toJSON().options.content}`);
         const circleIcons = datum.map((value, key) => {
             return (
               <CircleIcon image_url={value.image_url} key={key} />
             )
           });    
         return (
-            <div className="flex_follow_images_box">
-              { circleIcons }
+            <div>
+                <div className="modal_follow_title">
+                    <span>{ modal.toJSON().options.title }</span>
+                </div>
+                <div className="flex_follow_images_box">
+                    { circleIcons }
+                </div>
             </div>
         )
     }
 }
 
 const mapStateToProps = (state) => {
-    const { user } = state;
+    const { user, modal } = state;
     return {
-        user: user
+        user: user,
+        modal: modal
     };
 };
 

@@ -37,6 +37,7 @@ class UserInfo extends user_info {}
 
 const event_object = {
   id: '',
+  user_id: '',
   title: '',
   release: '',
   image_url: '',
@@ -113,19 +114,28 @@ const status = I.Record(status_object);
 
 class Status extends status {}
 
-const modal_options_object = {
+const circle_icons_body_modal_options_object = {
   content: '',
   title: '',
 };
 
-const modalOptions = I.Record(modal_options_object);
+const CircleIconsBodyModalOptions = I.Record(circle_icons_body_modal_options_object);
 
-class modalOption extends modalOptions {}
+class CircleIconsBodyModalOption extends CircleIconsBodyModalOptions {}
+
+const event_detail_modal_options_object = {
+  id: '',
+  user_id: '',
+};
+
+const EventDetailModalOptions = I.Record(event_detail_modal_options_object);
+
+class EventDetailModalOption extends EventDetailModalOptions {}
 
 const modal_object = {
   active: false,
   component: '',
-  options: modal_options_object,
+  options: '',
 }
 
 const modalRoot = I.Record(modal_object);
@@ -165,6 +175,7 @@ function create_list (datum, className) {
 };
 
 function create_list_append(arr, child, className) {
+  console.log(JSON.stringify(child));
   arr.push(eval(`new ${className}(${JSON.stringify(child)})`));
 };
 
@@ -230,10 +241,12 @@ const statuses = (state = I.fromJS(status_object), action) => {
 const modal = (state = I.fromJS(modal_object), action) => {
   switch (action.type) {
       case DISPLAY_MODAL:
+      console.log(action);
+        const componentName = (action.component + 'ModalOption').replace('Container', '');
         return I.fromJS(new Modal({
           active: true,
           component: action.component,
-          options: new modalOption(action.options)
+          options: eval(`new ${componentName}(${JSON.stringify(action.options)})`)
         }));
       case HIDE_MODAL:
         return I.fromJS(modal_object);

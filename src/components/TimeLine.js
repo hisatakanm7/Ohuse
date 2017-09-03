@@ -1,12 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { Provider } from 'react-redux';
-import { Link, hashHistory } from "react-router";
-import axios from "axios";
-import ContainerWork from './Work.js';
-import ContainerWorks from './Works.js';
-import ContainerFollows from './Follows.js';
+import ContainerTimeLineBody from './TimeLineBody.js'
 import ContainerTappedFollows from './TappedFollows.js';
 import workStyles from '../scss/Work.scss';
 import worksStyles from '../scss/Works.scss';
@@ -17,7 +11,7 @@ export class TimeLine extends React.Component {
         return (
             <div>
               <ContainerTappedFollows />
-              <ContainerWorks />
+              <ContainerTimeLineBody />
             </div>
         )
     }
