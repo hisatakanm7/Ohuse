@@ -175,7 +175,6 @@ function create_list (datum, className) {
 };
 
 function create_list_append(arr, child, className) {
-  console.log(JSON.stringify(child));
   arr.push(eval(`new ${className}(${JSON.stringify(child)})`));
 };
 
@@ -241,7 +240,6 @@ const statuses = (state = I.fromJS(status_object), action) => {
 const modal = (state = I.fromJS(modal_object), action) => {
   switch (action.type) {
       case DISPLAY_MODAL:
-      console.log(action);
         const componentName = (action.component + 'ModalOption').replace('Container', '');
         return I.fromJS(new Modal({
           active: true,
@@ -401,12 +399,8 @@ function append_list (arr, child) {
 };
 
 function append_works_list (arr, child) {
-  console.log('before new')
     const newWork = new Work(child);
-
     arr.push(newWork);
-    console.log('before push');
-
 };
 
 const loading_data = {
