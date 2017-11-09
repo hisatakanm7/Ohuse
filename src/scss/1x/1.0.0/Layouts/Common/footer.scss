@@ -1,0 +1,20 @@
+#footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    display: -webkit-flex;
+    display: flex;
+    border-top: thin solid #eee;
+    border-bottom: thick solid #fff;
+    a {
+      -webkit-flex-grow: 1;
+      flex-grow: 1;
+      padding-top: 2%;
+      padding-bottom: 1%;
+      text-align:center;
+      i::before {
+        font-size: 7vw;
+      }
+    }
+}

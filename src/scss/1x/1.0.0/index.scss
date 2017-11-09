@@ -1,0 +1,38 @@
+@charset "utf-8";
+
+@import "Layouts/Common/background.scss";
+@import "Layouts/Common/footer.scss";
+@import "Layouts/Common/header.scss";
+
+@import "Layouts/Projects/Ofuse/user/MyPage.scss";
+@import "Layouts/Projects/Ofuse/user/Work.scss";
+@import "Layouts/Projects/Ofuse/user/Works.scss";
+
+@import "Objects/Mold.scss";
+
+*{margin: 0; padding: 0;}
+html, body { height: 100%; }
+
+body {
+  background: linear-gradient(173deg, #ffffff, #ffead9);
+  width: 100%;
+  font-weight: lighter;
+}
+
+@media (min-width: 768px) {
+  body {
+    background-position: top center;
+    background-size: 992px auto;
+    font-weight: lighter;
+  }
+}
+@media (min-width: 992px) {
+  body {
+    background-size: 100% auto;
+    font-weight: lighter;
+  }
+}
+
+
+
+
