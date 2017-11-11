@@ -1,0 +1,21 @@
+@import "../../../../Objects/Mold"; 
+
+//work一つ一つを囲むdiv
+div.follow_works_box {
+  padding-right: 1%;
+}
+
+//月とその下線
+div.work_month {
+  border-bottom: thin solid #ffead9;
+}
+
+//フォローを選択した時に出現する右側の小さいアイコン
+div.selected_follow {
+  padding-left: 0;
+  padding-right: 1%;
+  img {
+    @extend .circle;
+    margin-bottom: 10%;
+  }
+}

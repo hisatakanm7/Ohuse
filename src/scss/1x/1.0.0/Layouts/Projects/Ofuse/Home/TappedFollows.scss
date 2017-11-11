@@ -1,0 +1,20 @@
+//メイン画面のフォロー６人+もっと見るボタン
+@mixin line_up_regular_intervals ($number) {
+    width: 100%;
+    display: flex;
+    -webkit-flex-wrap: nowrap; /* Safari */
+    flex-wrap:         nowrap;
+    justify-content: space-between;
+    align-items: center;
+    img {
+      width: 100% / $number;
+    }
+  }
+  
+  div.follow_img_group {
+    @include line_up_regular_intervals(7);
+    margin-bottom: 3%;
+    padding : 2% 1%;
+    border-bottom: medium solid #ffead9;
+  }
+  

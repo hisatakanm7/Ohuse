@@ -1,0 +1,130 @@
+
+//フォロー一覧モーダル
+.modal-content {
+    background: rgba(0,0,0,0.7);
+    .modal-body {
+      border-top: none;
+      color: white;
+      font-size: 1vw;
+      word-wrap: break-word;
+      span {
+        color: white;
+        font-family: Meiryo;
+        font-size: 2vw;
+      }
+  
+      // span.closeButtonFollow {
+      //   position: fixed;
+      //   top: 0;
+      //   right: 2%;
+      //   color: white;
+      //   font-family: Meiryo;
+      //   font-size: 7vw;
+      // }
+      // .modal_follow_title {
+      //   width: auto;
+      //   margin: 10px auto;
+      //   font-size: 7vw;
+      //   text-align: center;
+      // }
+    }
+  }
+  
+  // span.closeButtonFollow {
+  //   position: fixed;
+  //   top: 0;
+  //   right: 2%;
+  //   color: white;
+  //   font-family: Meiryo;
+  //   font-size: 7vw;
+  // }
+  .modal_follow_title {
+    width: auto;
+    margin: 10px auto;
+    font-size: 7vw;
+    text-align: center;
+  }
+  
+  
+  .work_modal_header {
+    display: flex;
+    width: 100%;
+    border-bottom: thin solid gray;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    margin-top: 5%;
+    padding-bottom: 2%;
+    .work_modal_header_icon {
+      width: 27%;
+      text-align: center;
+      img {
+        width: 100%;
+        height: auto;
+        border-radius: 50%;
+        margin-bottom: 7%;
+      }
+      span {
+        font-size: 2vw;
+      }
+    }
+    .work_modal_header_text {
+      width: 69%;
+      .work_modal_header_text_top {
+        display: flex;
+        width: 100%;
+        -webkit-justify-content: space-between;
+        justify-content: space-between;
+        align-items: center;
+        .work_modal_header_date {
+          width: 30%;
+          font-size: 4vw;
+        }
+        .work_modal_header_location {
+          width: 55%;
+        }
+      }
+      .work_modal_header_text_bottom {
+        .work_modal_header_title {
+          font-size: 8vw;
+        }
+      }
+    }
+  }
+  
+  .work_modal_img {
+    width: 100%;
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+  
+  //汎用
+  //followが並んでいる状態。丸画像とテキスト。
+  .flex_follow_images_box {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap:         wrap;
+    font-size: 2vw;
+    .flex_follow_image {
+      width: 16%;
+      text-align: center;
+      margin-top: 2%;
+      img {
+        width: 100%;
+        height: auto;
+        border-radius: 50%;
+      }
+      span {
+        font-size: 2vw;
+      }
+    }
+  }
+  
+  .work_modal_body {
+    margin-top: 2%;
+    div {
+      margin-bottom: 2%
+    }
+  }
+  

@@ -1,14 +1,18 @@
 @charset "utf-8";
 
-@import "Layouts/Common/background.scss";
-@import "Layouts/Common/footer.scss";
-@import "Layouts/Common/header.scss";
+@import "Layouts/Common/Background.scss";
+@import "Layouts/Common/Footer.scss";
+@import "Layouts/Common/Header.scss";
+@import "Layouts/Common/Components/Modal.scss";
 
-@import "Layouts/Projects/Ofuse/user/MyPage.scss";
-@import "Layouts/Projects/Ofuse/user/Work.scss";
-@import "Layouts/Projects/Ofuse/user/Works.scss";
+@import "Layouts/Projects/Ofuse/Common/Event.scss";
+@import "Layouts/Projects/Ofuse/User/MyPage.scss";
 
 @import "Objects/Mold.scss";
+
+@import "Layouts/Projects/Ofuse/Home/TappedFollows.scss";
+@import "Layouts/Projects/Ofuse/Home/TimeLine.scss";
+@import "Layouts/Projects/Ofuse/Home/TimeLineBody.scss";
 
 *{margin: 0; padding: 0;}
 html, body { height: 100%; }
@@ -21,6 +25,7 @@ body {
 
 @media (min-width: 768px) {
   body {
+    width: 768px;
     background-position: top center;
     background-size: 992px auto;
     font-weight: lighter;
@@ -28,6 +33,7 @@ body {
 }
 @media (min-width: 992px) {
   body {
+    width: 992px;
     background-size: 100% auto;
     font-weight: lighter;
   }
