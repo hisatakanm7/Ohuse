@@ -13,7 +13,6 @@ import axios from "axios";
 
 export interface Props {
   user: any,
-  create_work: any,
 }
 
 export class Header extends React.Component <Props, any> {
@@ -32,46 +31,12 @@ export class Header extends React.Component <Props, any> {
       this.setState({modalFlag: !this.state.modalFlag});
     }
     render() {
-      const { create_work } = this.props;
-      const styles = {
-        inputStyle: {
-          color: 'white',
-          WebkitTextFillColor : 'white',
-          fontSize: '5vw',
-        },
-        textareaStyle: {
-          color: 'white',
-          WebkitTextFillColor : 'white',
-          fontSize: '5vw',
-        },
-        hintStyle: {
-          color: 'gray',
-          WebkitTextFillColor : 'gray',
-          fontSize: '5vw',
-        },
-        errorStyle: {
-          color: 'white',
-          fontSize: '3vw',
-        },
-        underlineStyle: {
-          borderColor: 'white',
-        },
-        floatingLabelStyle: {
-          color: 'gray',
-          fontSize: '5vw',
-        },
-        floatingLabelFocusStyle: {
-          color: 'rgb(0,188,212)',
-          fontSize: '5vw',
-        },
-      };
-      const header = !this.state.loggedIn ? < LoggedInHeader displayModal={() => this.changeModalFlag()} /> : < NotLoggedInHeader />;
-
+      const headerRightPartial = this.state.loggedIn ? < LoggedInHeader displayModal={() => this.changeModalFlag()} /> : < NotLoggedInHeader />;
         return (
           <div className="header">
             <Icon />
             <div className="header_right">
-              {header}
+              {headerRightPartial}
             </div>
           </div>
         )
@@ -92,17 +57,16 @@ const LoggedInHeader = (props: any) => (
 
 const NotLoggedInHeader = () => (
   <div className="header_right_content">
-    <img src="https://s3-ap-northeast-1.amazonaws.com/ohuse.co/uploads/tmp/1498949515-15786-0001-6408/iQkvOwTa_normal.jpg"/>
+    <img src="https://s3-ap-northeast-1.amazonaws.com/ohuse.co/uploads/tmp/ofuse_images/twitter-logo.png"/>
     <div className="header_right_text">
       <a href="http://localhost:3000/auth/twitter">ログイン/新規登録</a>
     </div>
   </div>
 )
 
-const mapStateToProps = (state: {create_work: any, user: any}) => {
-    const { create_work, user } = state;
+const mapStateToProps = (state: { user: any}) => {
+    const { user } = state;
     return {
-      create_work: create_work,
       user: user
     };
 };
