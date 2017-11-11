@@ -1,12 +1,17 @@
 import {Record} from 'immutable';
 import * as I from 'immutable';
 
-const ErrorRecord = Record({
-    type: '',
-    attributes: '',
-  });
+export const StatusParameters: {
+    logged_in: any,
+    first_log_in: any,
+} = {
+    logged_in: '',
+    first_log_in: '',
+  };
 
-export default class Error extends ErrorRecord {
+const StatusRecord = Record(StatusParameters);
+
+export default class Status extends StatusRecord {
     constructor(initial: any) {
         super(I.fromJS(initial))
     }

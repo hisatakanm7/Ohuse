@@ -5,12 +5,6 @@ import axios from "axios";
 //*****完成*****
 //-----完成（action）----
 
-export const receiveLoggedIn = (response: any) => {
-  return {
-      type: constants.RECEIVE_LOGGED_IN,
-      response
-  }
-};
 
 export const receiveEvents = (response: any) => {
   return {
@@ -90,20 +84,52 @@ export const successGetCreators = (creators: any) => {
 
 //-----完成（function）----
 
+export const receiveError = () => {
+  return {
+
+  }
+}
+
+export const receiveLoggedIn = (response: any) => {
+  return {
+      type: constants.RECEIVE_LOGGED_IN,
+      response
+  }
+};
+
+export const receiveGetTimeLineContents = (response: any) => {
+  return {
+    type: constants.GET_TIMELINE_CONTENTS,
+    response
+  }
+}
+
 // //actionとしてのfunctionは実行後に必ずtypeをreturnしないといけない
-export function comfirmLoggedIn() {
+export function confirmLoggedIn(successAction:any) {
   return (dispatch: any) => {
-    dispatch(requestLoggedIn())
       return axios.get('http://localhost:3000/logged_in.json', {
           // withCredentials: true
         })
         .then(response => (
           dispatch(receiveLoggedIn(response.data)),
-          dispatch(receiveEvents(response.data))
+          successAction()
         ))
-        .catch(response => dispatch(receiveErrorLoggedIn(response.data)));
+        .catch(response => dispatch(receiveError()));
   }
 };
+
+export function getTimeLineContents(successAction:any) {
+  return (dispatch: any) => {
+    return axios.get('http://localhost:3000/logged_in.json', {
+        // withCredentials: true
+      })
+      .then(response => (
+        dispatch(receiveGetTimeLineContents(response.data)),
+        successAction()
+      ))
+      .catch(response => dispatch(receiveError()));
+  }
+}
 
 // export function updateTappedFollow(userId: any) {
 //   return (dispatch: any) => {

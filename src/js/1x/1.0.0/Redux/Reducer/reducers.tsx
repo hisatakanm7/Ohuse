@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 const I = require('immutable');
 import User from '../Model/User';
 import Error from '../Model/Error';
-import Status from '../Model/Status';
+import Status, { StatusParameters } from '../Model/Status';
 import Modal from '../Model/Modal';
 
 import {
@@ -135,7 +135,7 @@ const status_object = {
   first_log_in: '',
 }
 
-const status = I.Record(status_object);
+// const status = I.Record(status_object);
 
 // class Status extends status {}
 
@@ -205,20 +205,37 @@ function create_list_append(arr:any[], child:any, className:string) {
 //-----完成終了（function）----
 
 //-----完成（state）----
-const user = (state = I.fromJS(user_data), action: any) => {
+const status = (state = I.fromJS(StatusParameters), action: any) => {
+  switch (action.type) {
+    case RECEIVE_LOGGED_IN:
+    return state.set('logged_in', action.response.status.logged_in)
+    default:
+        return state;
+    }
+  }
+
+const user = (state = I.fromJS({
+  id: '',
+  name: '',
+  screen_name: '',
+  description: '',
+  status: '',
+  image_url: '',
+  joined: '',
+}), action: any) => {
     switch (action.type) {
-      case RECEIVE_LOGGED_IN:
-        const user = action.response.body.user
-        let tmp = state;
-        if (user.info != undefined) tmp = tmp.set('info', new User(user.info));
-        if (user.events != undefined) tmp = tmp.set('events', I.List(create_list(user.events, 'Event')));
-        if (user.ofuses != undefined) tmp = tmp.set('ofuses', I.List(create_list(user.ofuses, 'Ofuse')));
-        if (user.billed_ofuses != undefined) tmp = tmp.set('billed_ofuses', I.List(create_list(user.billed_ofuses, 'Ofuse')));
-        if (user.followed != undefined) tmp = tmp.set('followed', I.List(create_list(user.followed, 'Follow')));
-        if (user.follower != undefined) tmp = tmp.set('follower', I.List(create_list(user.follower, 'Follow')));
-        if (user.notifications != undefined) tmp = tmp.set('notifications', I.List(create_list(user.notifications, 'Notification')));
-        if (user.TappedFollowed != undefined) tmp = tmp.set('TappedFollowed', I.List(create_list(user.TappedFollowed, 'TappedFollow')));
-        return tmp;
+      // case RECEIVE_LOGGED_IN:
+      //   const user = action.response.body.user
+      //   let tmp = state;
+      //   if (user.info != undefined) tmp = tmp.set('info', new User(user.info));
+      //   if (user.events != undefined) tmp = tmp.set('events', I.List(create_list(user.events, 'Event')));
+      //   if (user.ofuses != undefined) tmp = tmp.set('ofuses', I.List(create_list(user.ofuses, 'Ofuse')));
+      //   if (user.billed_ofuses != undefined) tmp = tmp.set('billed_ofuses', I.List(create_list(user.billed_ofuses, 'Ofuse')));
+      //   if (user.followed != undefined) tmp = tmp.set('followed', I.List(create_list(user.followed, 'Follow')));
+      //   if (user.follower != undefined) tmp = tmp.set('follower', I.List(create_list(user.follower, 'Follow')));
+      //   if (user.notifications != undefined) tmp = tmp.set('notifications', I.List(create_list(user.notifications, 'Notification')));
+      //   if (user.TappedFollowed != undefined) tmp = tmp.set('TappedFollowed', I.List(create_list(user.TappedFollowed, 'TappedFollow')));
+      //   return tmp;
       case TAPPING_FOLLOW:
         return state.set('followed',
           state.get('followed').update(
@@ -300,7 +317,7 @@ const reducer = combineReducers({
     user,
     events,
     errors,
-    statuses,
+    status,
     modal,
     creators,
 });

@@ -9,29 +9,15 @@ import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import axios from "axios";
-// import MomentFormat from './Moment';
 
 export interface Props {
   user: any,
+  status: any,
 }
 
 export class Header extends React.Component <Props, any> {
-    constructor() {
-      super();
-      this.state = {
-        completeModalFlag: false,
-        modalFlag: false,
-      }
-      this.handleSubmit = this.handleSubmit.bind(this);
-    }
-    handleSubmit(othuerState: any) {
-      this.setState({completeModalFlag: !this.state.completeModalFlag})
-    }
-    changeModalFlag() {
-      this.setState({modalFlag: !this.state.modalFlag});
-    }
     render() {
-      const headerRightPartial = this.state.loggedIn ? < LoggedInHeader displayModal={() => this.changeModalFlag()} /> : < NotLoggedInHeader />;
+      const headerRightPartial = this.props.status.loggedIn ? < LoggedInHeader displayModal={() => {}} /> : <NotLoggedInHeader />;
         return (
           <div className="header">
             <Icon />
@@ -64,10 +50,11 @@ const NotLoggedInHeader = () => (
   </div>
 )
 
-const mapStateToProps = (state: { user: any}) => {
+const mapStateToProps = (state: { user: any, status: any}) => {
     const { user } = state;
     return {
-      user: user
+      user: user,
+      status: status
     };
 };
 

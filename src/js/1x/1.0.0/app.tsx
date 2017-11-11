@@ -19,33 +19,41 @@ import ContainerTimeLine from './Projects/Ofuse/Home/TimeLine'
 import ContainerMyPage from './Projects/Ofuse/MyPage/MyPage'
 import ContainerSearch from './Projects/Ofuse/Search/Search'
 import ContainerUser from './Projects/Ofuse/MyPage/User'
-import { comfirmLoggedIn } from './Redux/Action/action';
+import { confirmLoggedIn } from './Redux/Action/action';
 
 const store = configureStore();
 
 export interface Props {
-  comfirmLoggedIn: any;
+  confirmLoggedIn: any;
 }
 
-class App extends React.Component <Props, object> {
-  componentWillMount() {
-    this.props.comfirmLoggedIn();
+class App extends React.Component <Props, any> {
+  constructor() {
+    super()
+    this.state = {
+      wasFinishedConfirmLoggedIn: false,
+    }
+  }
+componentWillMount() {
+    this.props.confirmLoggedIn(() => this.setState({wasFinishedConfirmLoggedIn: true}));
   }
   render() {
     return (
       <Router>
-        <MuiThemeProvider>
-          <div>
-            <ContainerHeader />
-            <ContainerModalRoot />
-            <Route exact path="/" component={ContainerTimeLine}/>
-            <Route path="/work" component={ContainerMyPage}/>
-            <Route path="/search" component={ContainerSearch}/>
-            <Route path="/user" component={ContainerUser}/>
-            <Route path="/creators/:creatorId" component={ContainerUser} />
-            <ContainerFooter />
-          </div>
-        </MuiThemeProvider>
+        {(this.state.wasFinishedConfirmLoggedIn) && 
+          <MuiThemeProvider>
+              <div>
+              <ContainerHeader />
+              <ContainerModalRoot />
+              <Route exact path="/" component={ContainerTimeLine}/>
+              <Route path="/work" component={ContainerMyPage}/>
+              <Route path="/search" component={ContainerSearch}/>
+              <Route path="/user" component={ContainerUser}/>
+              <Route path="/creators/:creatorId" component={ContainerUser} />
+              <ContainerFooter />
+            </div>
+          </MuiThemeProvider>
+        }
       </Router>
     );
   }
@@ -58,7 +66,7 @@ const mapStateToProps = () => {
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
-      comfirmLoggedIn: () =>  dispatch(comfirmLoggedIn()),
+      confirmLoggedIn: (successAction: any) =>  dispatch(confirmLoggedIn(successAction)),
     };
 };
 
