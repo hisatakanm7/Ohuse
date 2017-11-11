@@ -9,6 +9,14 @@
   },
   "devDependencies": {},
   "dependencies": {
+    "@types/immutable": "^3.8.7",
+    "@types/material-ui": "^0.18.4",
+    "@types/react": "^16.0.21",
+    "@types/react-bootstrap": "^0.31.6",
+    "@types/react-dom": "^16.0.2",
+    "@types/react-redux": "^5.0.12",
+    "@types/react-router-dom": "^4.2.0",
+    "@types/redux-logger": "^3.0.5",
     "awesome-typescript-loader": "^3.3.0",
     "axios": "^0.16.1",
     "babel-core": "^6.24.1",
@@ -44,6 +52,7 @@
     "style-loader": "^0.17.0",
     "svg-react-loader": "^0.4.5",
     "typescript": "^2.6.1",
+    "typings-for-css-modules-loader": "^1.7.0",
     "url-loader": "^0.5.8",
     "webpack": "3.0.0",
     "webpack-dev-server": "^2.9.4"

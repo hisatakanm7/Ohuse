@@ -7,17 +7,17 @@ import * as I from 'immutable';
 
 const loggerMiddleware = createLogger({
         stateTransformer: state => {
-            return state && I.fromJS(state).map(s => {
+            return state && I.fromJS(state).map((s: any) => {
                     if (s === 'page') return s.toJS();
                     return s;
                 }).toJS();
         },
     });
 
-export default function configureStore(preloadedState) {
+export default function configureStore() {
     return createStore(
         reducer,
-        preloadedState,
+        // preloadedState,
         applyMiddleware(
             thunkMiddleware,
             loggerMiddleware

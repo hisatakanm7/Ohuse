@@ -1,5 +1,9 @@
 import { combineReducers } from 'redux';
 const I = require('immutable');
+import User from '../Model/User';
+import Error from '../Model/Error';
+import Status from '../Model/Status';
+import Modal from '../Model/Modal';
 
 import {
   ADD_LIST,
@@ -19,7 +23,7 @@ import {
   FILTER_CREATORS,
   REQUEST_GET_CREATORS,
   SUCCESS_GET_CREATORS,
-} from '../Action/action';
+} from '../Constants/index';
 
 const user_info_object = {
   id: '',
@@ -74,7 +78,7 @@ const follow = I.Record(follow_object);
 
 class Follow extends follow {}
 
-const creators_object = {
+const creators_object: {all: any[], filtered: any, hasRequestedGetCreators: boolean} = {
   all: [],
   filtered: [],
   hasRequestedGetCreators: false,
@@ -124,7 +128,7 @@ const error_object = {
 
 const error = I.Record(error_object);
 
-class Error extends error {}
+// class Error extends error {}
 
 const status_object = {
   logged_in: '',
@@ -133,7 +137,7 @@ const status_object = {
 
 const status = I.Record(status_object);
 
-class Status extends status {}
+// class Status extends status {}
 
 const circle_icons_body_modal_options_object = {
   content: '',
@@ -161,11 +165,20 @@ const modal_object = {
 
 const modalRoot = I.Record(modal_object);
 
-class Modal extends modalRoot {}
+// class Modal extends modalRoot {}
 
 
 //User
-const user_data = {
+const user_data: {
+  info: any,
+  events: any[],
+  ofuses: any[],
+  billed_ofuses: any[],
+  followed: any[],
+  follower: any[],
+  notifications: any[],
+  TappedFollowed: any[],
+} = {
   info: user_info_object,
   events: [],
   ofuses: [],
@@ -176,28 +189,28 @@ const user_data = {
   TappedFollowed: [],
 }
 
-const events_data = []
+const events_data: any[] = []
 
 
-function create_list (datum, className) {
-  let arr = [];
-  datum.map(child => create_list_append(arr, child, className));
+function create_list (datum: any, className: any) {
+  let arr: any[] = [];
+  datum.map((child: any) => create_list_append(arr, child, className));
   return arr;
 };
 
-function create_list_append(arr, child, className) {
+function create_list_append(arr:any[], child:any, className:string) {
   arr.push(eval(`new ${className}(${JSON.stringify(child)})`));
 };
 
 //-----完成終了（function）----
 
 //-----完成（state）----
-const user = (state = I.fromJS(user_data), action) => {
+const user = (state = I.fromJS(user_data), action: any) => {
     switch (action.type) {
       case RECEIVE_LOGGED_IN:
         const user = action.response.body.user
         let tmp = state;
-        if (user.info != undefined) tmp = tmp.set('info', new UserInfo(user.info));
+        if (user.info != undefined) tmp = tmp.set('info', new User(user.info));
         if (user.events != undefined) tmp = tmp.set('events', I.List(create_list(user.events, 'Event')));
         if (user.ofuses != undefined) tmp = tmp.set('ofuses', I.List(create_list(user.ofuses, 'Ofuse')));
         if (user.billed_ofuses != undefined) tmp = tmp.set('billed_ofuses', I.List(create_list(user.billed_ofuses, 'Ofuse')));
@@ -209,9 +222,9 @@ const user = (state = I.fromJS(user_data), action) => {
       case TAPPING_FOLLOW:
         return state.set('followed',
           state.get('followed').update(
-            state.get('followed').findIndex(function(followed) { 
+            state.get('followed').findIndex(function(followed: any) { 
               return followed.get('id') === action.id; 
-            }), function(followed) {
+            }), function(followed: any) {
               return followed.set('tapping', !followed.get('tapping'));
             }
           )
@@ -221,7 +234,7 @@ const user = (state = I.fromJS(user_data), action) => {
     }
 };
 
-const events = (state = I.fromJS(events_data), action) => {
+const events = (state = I.fromJS(events_data), action: any) => {
   switch (action.type) {
       case RECEIVE_EVENTS:
         return I.List(create_list(action.response.body.events, 'Event'));
@@ -230,7 +243,7 @@ const events = (state = I.fromJS(events_data), action) => {
     }
 };
 
-const errors = (state = I.fromJS(error_object), action) => {
+const errors = (state = I.fromJS(error_object), action: any) => {
   switch (action.type) {
       case THROW_ERROR:
         return I.fromJS(new Error(action.data));
@@ -239,7 +252,7 @@ const errors = (state = I.fromJS(error_object), action) => {
     }
 };
 
-const statuses = (state = I.fromJS(status_object), action) => {
+const statuses = (state = I.fromJS(status_object), action: any) => {
   switch (action.type) {
       case REFLECT_STATUS:
         return I.fromJS(new Status(action.response.status));
@@ -248,7 +261,7 @@ const statuses = (state = I.fromJS(status_object), action) => {
     }
 };
 
-const modal = (state = I.fromJS(modal_object), action) => {
+const modal = (state = I.fromJS(modal_object), action: any) => {
   switch (action.type) {
       case DISPLAY_MODAL:
         const componentName = (action.component + 'ModalOption').replace('Container', '');
@@ -264,7 +277,7 @@ const modal = (state = I.fromJS(modal_object), action) => {
     }
 };
 
-const creators = (state = I.fromJS(creators_object), action) => {
+const creators = (state = I.fromJS(creators_object), action: any) => {
   switch (action.type) {
     case REQUEST_GET_CREATORS:
       return state
@@ -274,7 +287,7 @@ const creators = (state = I.fromJS(creators_object), action) => {
         .set('all', I.List(create_list(action.creators, 'Creator')))
         .set('hasRequestedGetCreators', false);
     case FILTER_CREATORS: //重いかもしれないが、一旦とりあえずやってみる
-      const creator = state.get('all').filter(creator => 
+      const creator = state.get('all').filter((creator: any) => 
         creator.get('screen_name').startsWith('@' + action.screen_name)
       )
       return state.set('filtered', creator);
